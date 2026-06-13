@@ -1,0 +1,31 @@
+{
+  "itemGroup.fatality": "Example Mod Tab",
+  "block.fatality.example_block": "Example Block",
+  "item.fatality.example_item": "Example Item",
+
+  "fatality.configuration.title": "Fatality Configs",
+  "fatality.configuration.section.fatality.common.toml": "Fatality Configs",
+  "fatality.configuration.section.fatality.common.toml.title": "Fatality Configs",
+  "fatality.configuration.items": "Item List",
+  "fatality.configuration.logDirtBlock": "Log Dirt Block",
+  "fatality.configuration.magicNumberIntroduction": "Magic Number Text",
+  "fatality.configuration.magicNumber": "Magic Number",
+
+  "item.fatality.hold_shift": "Hold Shift to view attributes",
+  "item.fatality.hold_ctrl": "Hold Ctrl to view description",
+
+  "item.fatality.abyss_dragon_ball": "Abyss Dragon Ball",
+  "item.fatality.abyss_dragon_ball.desc": "A mysterious orb from the depths of the abyss. It grants the wearer protection from damage.",
+  "item.fatality.power_ring": "Power Ring",
+  "item.fatality.power_ring.desc": "A ring infused with ancient power. Increases attack damage and maximum health.",
+  "item.fatality.attributes": "Attributes",
+  "item.fatality.description": "Description",
+  "item.fatality.no_attributes": "No special attributes",
+  "attribute.damage_reduction": "Damage Reduction",
+  "attribute.attack_damage": "Attack Damage",
+  "attribute.max_health": "Max Health",
+  "attribute.movement_speed": "Movement Speed",
+  "attribute.armor": "Armor",
+  "attribute.armor_toughness": "Armor Toughness",
+  "attribute.attack_speed": "Attack Speed"
+}

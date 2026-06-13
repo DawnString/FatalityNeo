@@ -1,0 +1,31 @@
+{
+  "itemGroup.fatality": "示例模组标签页",
+  "block.fatality.example_block": "示例方块",
+  "item.fatality.example_item": "示例物品",
+
+  "fatality.configuration.title": "Fatality 配置",
+  "fatality.configuration.section.fatality.common.toml": "Fatality 配置",
+  "fatality.configuration.section.fatality.common.toml.title": "Fatality 配置",
+  "fatality.configuration.items": "物品列表",
+  "fatality.configuration.logDirtBlock": "记录泥土方块",
+  "fatality.configuration.magicNumberIntroduction": "魔法数字文本",
+  "fatality.configuration.magicNumber": "魔法数字",
+
+  "item.fatality.hold_shift": "按住 Shift 查看属性",
+  "item.fatality.hold_ctrl": "按住 Ctrl 查看描述",
+
+  "item.fatality.abyss_dragon_ball": "深渊龙珠",
+  "item.fatality.abyss_dragon_ball.desc": "来自深渊深处的神秘宝珠，为佩戴者提供伤害保护。",
+  "item.fatality.power_ring": "力量戒指",
+  "item.fatality.power_ring.desc": "注入古老力量的戒指，增加攻击伤害和最大生命值。",
+  "item.fatality.attributes": "属性",
+  "item.fatality.description": "描述",
+  "item.fatality.no_attributes": "无特殊属性",
+  "attribute.damage_reduction": "伤害减免",
+  "attribute.attack_damage": "攻击伤害",
+  "attribute.max_health": "最大生命值",
+  "attribute.movement_speed": "移动速度",
+  "attribute.armor": "护甲",
+  "attribute.armor_toughness": "护甲韧性",
+  "attribute.attack_speed": "攻击速度"
+}
