@@ -3,8 +3,12 @@
   "package": "cn.dawnstring.fatality.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "MixinInventoryMenu",
+    "ContainerSlotsAccessor"
   ],
   "client": [
+    "ContainerScreenAccessor",
+    "MixinInventoryScreen"
   ],
   "injectors": {
     "defaultRequire": 1

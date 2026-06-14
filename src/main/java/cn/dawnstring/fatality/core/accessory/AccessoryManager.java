@@ -6,10 +6,15 @@ import cn.dawnstring.fatality.core.capability.PlayerAttributesProvider;
 import cn.dawnstring.fatality.core.register.ModCapabilities;
 import cn.dawnstring.fatality.item.AccessoryItem;
 import cn.dawnstring.fatality.item.StatModifier;
+import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
@@ -22,6 +27,12 @@ public class AccessoryManager
     private static Map<UUID, SimpleContainer> accessoryMap = new HashMap<UUID, SimpleContainer>();
     private static final String KEY = "FatalityAccessories";
     public static final int SLOT_COUNT = 7;
+
+    private static final ResourceLocation MOD_ID_HEALTH = ResourceLocation.fromNamespaceAndPath(Fatality.MODID, "accessory_health");
+    private static final ResourceLocation MOD_ID_ARMOR = ResourceLocation.fromNamespaceAndPath(Fatality.MODID, "accessory_armor");
+    private static final ResourceLocation MOD_ID_ARMOR_TOUGHNESS = ResourceLocation.fromNamespaceAndPath(Fatality.MODID, "accessory_armor_toughness");
+    private static final ResourceLocation MOD_ID_MOVEMENT_SPEED = ResourceLocation.fromNamespaceAndPath(Fatality.MODID, "accessory_move_speed");
+    private static final ResourceLocation MOD_ID_ATTACK_SPEED = ResourceLocation.fromNamespaceAndPath(Fatality.MODID, "accessory_attack_speed");
 
     public static SimpleContainer getInventory(Player player)
     {
@@ -52,6 +63,42 @@ public class AccessoryManager
         }
 
         PlayerAttributesProvider.updateAttributes(player, attrs);
+        syncVanillaAttributes(player, attrs);
+    }
+
+    private static void syncVanillaAttributes(Player player, PlayerAttributes attrs)
+    {
+        float healthBonus = attrs.getMaxHealthBonus() - 20;
+        applyVanillaModifier(player, Attributes.MAX_HEALTH, healthBonus, MOD_ID_HEALTH);
+        applyVanillaModifier(player, Attributes.ARMOR, attrs.getArmor(), MOD_ID_ARMOR);
+        applyVanillaModifier(player, Attributes.ARMOR_TOUGHNESS, attrs.getArmorToughness(), MOD_ID_ARMOR_TOUGHNESS);
+        applyVanillaModifier(player, Attributes.MOVEMENT_SPEED, attrs.getMoveSpeedBonus(), MOD_ID_MOVEMENT_SPEED);
+        applyVanillaModifier(player, Attributes.ATTACK_SPEED, attrs.getAttackSpeed(), MOD_ID_ATTACK_SPEED);
+
+        if (healthBonus > 0)
+        {
+            double current = player.getHealth();
+            double currentMax = player.getMaxHealth();
+            if (current == currentMax - healthBonus)
+                player.heal(healthBonus);
+            else
+                player.setHealth(player.getHealth() + healthBonus);
+        }
+    }
+
+    private static void applyVanillaModifier(Player player, Holder<Attribute> attribute, double value, ResourceLocation id)
+    {
+        var instance = player.getAttribute(attribute);
+        if (instance == null) return;
+
+        instance.removeModifier(id);
+
+        if (value != 0)
+        {
+            instance.addTransientModifier(
+                    new AttributeModifier(id, value, AttributeModifier.Operation.ADD_VALUE)
+            );
+        }
     }
 
     private static void applyModifier(PlayerAttributes playerAttributes, StatModifier modifier)

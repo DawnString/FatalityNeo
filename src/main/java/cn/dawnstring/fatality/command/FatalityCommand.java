@@ -1,15 +1,22 @@
 package cn.dawnstring.fatality.command;
 
 import cn.dawnstring.fatality.Fatality;
+import cn.dawnstring.fatality.core.accessory.AccessoryManager;
 import cn.dawnstring.fatality.core.register.ModCapabilities;
+import cn.dawnstring.fatality.item.AccessoryItem;
+import cn.dawnstring.fatality.item.StatModifier;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+
+import java.util.List;
 
 @EventBusSubscriber(modid = Fatality.MODID)
 public class FatalityCommand
@@ -47,7 +54,56 @@ public class FatalityCommand
                                 }
                             }
                             return 1;
-                        })));
+                        }))
+                .then(LiteralArgumentBuilder.<CommandSourceStack>literal("accessory")
+                        .executes(context ->
+                        {
+                            CommandSourceStack source = context.getSource();
+                            if (source.getEntity() instanceof ServerPlayer player)
+                            {
+                               SimpleContainer accessories = AccessoryManager.getInventory(player);
+                               if (accessories.getItems() != null)
+                               {
+                                   for (ItemStack item : accessories.getItems())
+                                   {
+                                       if (item.isEmpty()) continue;
+                                       if (item.getItem() instanceof AccessoryItem accessoryItem)
+                                       {
+                                           String info = getAccessoryInfo(accessoryItem);
+                                           source.sendSuccess(() -> Component.literal(info), false);
+                                       }
+                                   }
+                               }
+                               else
+                               {
+                                   source.sendFailure(Component.literal("饰品栏无饰品"));
+                               }
+                            }
+                            return 1;
+                        }))
+        );
+    }
+
+    private static String getAccessoryInfo(AccessoryItem accessoryItem)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("§e").append(Component.translatable(accessoryItem.getDescriptionId()).getString());
+
+        List<StatModifier> modifiers = accessoryItem.getModifiers();
+        if (!modifiers.isEmpty())
+        {
+            sb.append(" §7[");
+            for (int i = 0; i < modifiers.size(); i++)
+            {
+                var mod = modifiers.get(i);
+                String sign = mod.value() >= 0 ? "+" : "";
+                sb.append("§f").append(mod.field()).append(": §a").append(sign).append(mod.value());
+                if (i < modifiers.size() - 1) sb.append("§7, ");
+            }
+            sb.append("§7]");
+        }
+
+        return sb.toString();
     }
 
     @SubscribeEvent
