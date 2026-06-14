@@ -30,6 +30,11 @@ public class PlayerAttributesProvider implements ICapabilityProvider<Entity, Voi
         });
     }
 
+    public static void updateAttributes(Player player, PlayerAttributes attrs)
+    {
+        ATTRIBUTES.put(player.getUUID(), attrs);
+    }
+
     @Override
     public @Nullable IPlayerAttributes getCapability(Entity entity, Void context)
     {
