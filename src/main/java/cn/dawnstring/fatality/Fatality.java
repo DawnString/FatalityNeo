@@ -1,6 +1,7 @@
 package cn.dawnstring.fatality;
 
 import cn.dawnstring.fatality.command.FatalityCommand;
+import cn.dawnstring.fatality.register.AutoItemRegistry;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
@@ -21,6 +22,8 @@ public class Fatality
 
     public Fatality(IEventBus modEventBus, ModContainer modContainer)
     {
+        AutoItemRegistry.registerItems(modEventBus);
+
         LOGGER.info("Fatality initialized");
     }
 

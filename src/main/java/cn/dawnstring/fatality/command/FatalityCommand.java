@@ -70,13 +70,20 @@ public class FatalityCommand
                                        if (item.getItem() instanceof AccessoryItem accessoryItem)
                                        {
                                            String info = getAccessoryInfo(accessoryItem);
-                                           source.sendSuccess(() -> Component.literal(info), false);
+                                           if (info != null)
+                                           {
+                                               source.sendSuccess(() -> Component.literal(info), false);
+                                           }
+                                           else
+                                           {
+                                               source.sendFailure(Component.literal("饰品栏无饰品"));
+                                           }
                                        }
                                    }
                                }
                                else
                                {
-                                   source.sendFailure(Component.literal("饰品栏无饰品"));
+                                   source.sendFailure(Component.literal("发生错误"));
                                }
                             }
                             return 1;

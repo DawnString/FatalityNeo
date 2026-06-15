@@ -1,5 +1,6 @@
 package cn.dawnstring.fatality.core.accessory;
 
+import cn.dawnstring.fatality.Fatality;
 import cn.dawnstring.fatality.item.AccessoryItem;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
@@ -44,7 +45,6 @@ public class AccessorySlot extends Slot
     public void setChanged()
     {
         super.setChanged();
-        onChanged();
     }
 
     private void onChanged()
@@ -59,4 +59,20 @@ public class AccessorySlot extends Slot
     {
         return 1;
     }
+
+    @Override
+    public void set(ItemStack stack)
+    {
+        super.set(stack.isEmpty() ? ItemStack.EMPTY : stack.copy());
+        onChanged();
+    }
+
+    @Override
+    public ItemStack remove(int amount)
+    {
+        ItemStack result = super.remove(amount);
+        return result.isEmpty() ? ItemStack.EMPTY : result.copy();
+    }
+
+
 }

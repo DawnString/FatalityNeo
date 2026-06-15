@@ -40,3 +40,4 @@ repo/
 !**/src/**/repo/
 /玩家属性.txt
 /README.md
+/forge/

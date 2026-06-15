@@ -21,10 +21,13 @@ import net.minecraft.world.item.ItemStack;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class AccessoryManager
 {
-    private static Map<UUID, SimpleContainer> accessoryMap = new HashMap<UUID, SimpleContainer>();
+    private static Map<UUID, SimpleContainer> serverMap = new ConcurrentHashMap<>();
+    private static Map<UUID, SimpleContainer> clientMap = new ConcurrentHashMap<>();
+
     private static final String KEY = "FatalityAccessories";
     public static final int SLOT_COUNT = 7;
 
@@ -36,7 +39,8 @@ public class AccessoryManager
 
     public static SimpleContainer getInventory(Player player)
     {
-        return accessoryMap.computeIfAbsent(player.getUUID(), id ->
+        var map = player.level().isClientSide() ? clientMap : serverMap;
+        return map.computeIfAbsent(player.getUUID(), id ->
         {
             SimpleContainer inv = new SimpleContainer(SLOT_COUNT);
             load(player, inv);
@@ -144,14 +148,15 @@ public class AccessoryManager
 
     public static void save(Player player)
     {
-        SimpleContainer accessory = accessoryMap.get(player.getUUID());
-        if (accessory == null) return;
+        var map = player.level().isClientSide() ? clientMap : serverMap;
+        SimpleContainer container = map.get(player.getUUID());
+        if (container == null) return;
 
         ListTag list = new ListTag();
         for (int i = 0; i < SLOT_COUNT; i++)
         {
             CompoundTag tag = new CompoundTag();
-            ItemStack stack = accessory.getItem(i);
+            ItemStack stack = container.getItem(i);
             if (!stack.isEmpty())
             {
                 tag.put("item", stack.save(RegistryAccess.EMPTY, new CompoundTag()));
@@ -178,6 +183,7 @@ public class AccessoryManager
 
     public static void remove(UUID uuid)
     {
-        accessoryMap.remove(uuid);
+        serverMap.remove(uuid);
+        clientMap.remove(uuid);
     }
 }
