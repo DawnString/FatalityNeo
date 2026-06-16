@@ -73,6 +73,4 @@ public class AccessorySlot extends Slot
         ItemStack result = super.remove(amount);
         return result.isEmpty() ? ItemStack.EMPTY : result.copy();
     }
-
-
 }

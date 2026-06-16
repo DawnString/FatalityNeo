@@ -12,3 +12,11 @@
 -AccessoryItem
 -TooltipHelper
 
+2026/6/16 19/14 添加了debug命令，/fatality debug damageCalc，用于检查伤害计算事件
+-FatalityCommand
+-ArmorHandler
+-DamageHandler
+-DebugRecord
+-DebugRecorder
+-MixinLivingEntityHurt
+

@@ -4,7 +4,9 @@ import cn.dawnstring.fatality.core.capability.PlayerAttributes;
 import cn.dawnstring.fatality.core.capability.PlayerAttributesProvider;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 
 import java.util.Random;
 
@@ -24,36 +26,51 @@ public class ArmorHandler
         PlayerAttributes attributes = PlayerAttributesProvider.getAttributes(target);
         float armor = attributes.getArmor();
         float toughness = attributes.getArmorToughness();
-        //穿透抗性
+        // 穿透抗性
         float penResist = attributes.getPenetrationResistance();
-        //抗穿透系数
+        // 抗穿透系数
         float penResistCoefficient = attributes.getPenetrationResistanceCoefficient();
-        //减伤
+        // 伤害抗性
         float damageReduction = attributes.getDamageReduction();
 
-        //基础值
+        // 穿透概率
         float baseProb = (rawDamage - armor) / Math.max(1, rawDamage) * (1 - penResistCoefficient);
-        //随机数
         float randomOffset = RANDOM.nextFloat() * 0.2f - 0.1f;
-
         float penProb = Math.max(0, Math.min(1, baseProb + randomOffset));
 
-        //穿透概率
         boolean penetrated = RANDOM.nextFloat() < penProb;
 
-        //穿透随机加成，按照难度选取
+        // 穿透随机加成，按难度选取
         float penBonus = getPenetrationRandomBonus(target.level().getDifficulty());
 
         float finalDamage;
 
-        if(penetrated)
+        if (penetrated)
         {
-            finalDamage = rawDamage * (1 - armor * toughness / (armor * toughness + BALANCE)) * (1 - penResist) * (1 + penBonus);
+            float denom = armor * toughness + BALANCE;
+            float reduction = denom > 0 ? (armor * toughness) / denom : 0;
+            finalDamage = rawDamage * (1 - reduction) * (1 - penResist) * (1 + penBonus);
         }
         else
         {
-            finalDamage = rawDamage * (1 - armor / (armor + BALANCE * penResist)) * (1 - damageReduction);
+            float denom = armor + BALANCE * penResistCoefficient;
+            float reduction = denom > 0 ? armor / denom : 0;
+            finalDamage = rawDamage * (1 - reduction) * (1 - damageReduction);
         }
+
+        // 记录数据
+        Entity attacker = source.getEntity();
+        if (attacker instanceof Projectile proj) attacker = proj.getOwner();
+        if (attacker instanceof Player playerAttacker)
+        {
+            DebugRecorder.stageArmor(
+                    playerAttacker.getUUID(),
+                    target.getUUID(),
+                    finalDamage,
+                    penetrated
+            );
+        }
+
         return Math.max(0, finalDamage);
     }
 

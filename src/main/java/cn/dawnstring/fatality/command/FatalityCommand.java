@@ -2,6 +2,7 @@ package cn.dawnstring.fatality.command;
 
 import cn.dawnstring.fatality.Fatality;
 import cn.dawnstring.fatality.core.accessory.AccessoryManager;
+import cn.dawnstring.fatality.core.combat.DebugRecorder;
 import cn.dawnstring.fatality.core.register.ModCapabilities;
 import cn.dawnstring.fatality.item.AccessoryItem;
 import cn.dawnstring.fatality.item.StatModifier;
@@ -92,8 +93,34 @@ public class FatalityCommand
                         .then(LiteralArgumentBuilder.<CommandSourceStack>literal("damageCalc")
                                 .executes(context ->
                                 {
-                                    //TODO 实现记录伤害事件
-
+                                    CommandSourceStack source = context.getSource();
+                                    if (source.getEntity() instanceof ServerPlayer player)
+                                    {
+                                        boolean nowActive = DebugRecorder.toggle(player.getUUID());
+                                        if (nowActive)
+                                        {
+                                            source.sendSuccess(() -> Component.literal("§a开始记录伤害数据"), false);
+                                        }
+                                        else
+                                        {
+                                            var records = DebugRecorder.flush(player.getUUID());
+                                            if (records.isEmpty())
+                                            {
+                                                source.sendSuccess(() -> Component.literal("§e未记录到任何伤害"), false);
+                                            }
+                                            else
+                                            {
+                                                source.sendSuccess(() -> Component.literal("§e=== 伤害记录 (" + records.size() + " 条) ==="), false);
+                                                for (int idx = 0; idx < records.size(); idx++)
+                                                {
+                                                    int i = idx;
+                                                    int index = i + 1;
+                                                    source.sendSuccess(() -> Component.literal("§7" + index + ". " + records.get(i).format()), false);
+                                                }
+                                            }
+                                            source.sendSuccess(() -> Component.literal("§c结束记录"), false);
+                                        }
+                                    }
                                     return 1;
                                 })
                         )

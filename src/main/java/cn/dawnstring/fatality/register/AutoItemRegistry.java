@@ -46,8 +46,10 @@ public class AutoItemRegistry
         try
         {
             String className = data.clazz().getClassName();
+
             Class<?> clazz = Class.forName(className, true,
                     Thread.currentThread().getContextClassLoader());
+
             return clazz.asSubclass(Item.class);
         }
         catch (Exception e)
