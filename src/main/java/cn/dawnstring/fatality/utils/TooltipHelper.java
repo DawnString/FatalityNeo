@@ -37,14 +37,14 @@ public class TooltipHelper
     public static void addDescriptiveTooltip(ItemStack stack, List<Component> tooltip,
                                              TooltipFlag flag, String story, String attributes)
     {
-
         // 检查是否按住Shift键
         boolean isShiftDown = isShiftDown();
         // 检查是否按住Alt键
         boolean isAltDown = isAltDown();
 
         // 默认显示提示信息
-        if (!isShiftDown && !isAltDown) {
+        if (!isShiftDown && !isAltDown)
+        {
             tooltip.add(Component.literal("§7按住§eAlt§7查看物品描述"));
             tooltip.add(Component.literal("§7按住§eShift§7查看物品属性"));
             return;

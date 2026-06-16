@@ -52,6 +52,7 @@ public class ModEvents
         {
             AccessoryManager.save(player);
             AccessoryManager.remove(player.getUUID());
+            PlayerAttributesProvider.remove(player.getUUID());
         }
     }
 

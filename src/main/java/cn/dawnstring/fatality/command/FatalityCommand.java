@@ -88,9 +88,20 @@ public class FatalityCommand
                             }
                             return 1;
                         }))
+                .then(LiteralArgumentBuilder.<CommandSourceStack>literal("debug")
+                        .then(LiteralArgumentBuilder.<CommandSourceStack>literal("damageCalc")
+                                .executes(context ->
+                                {
+                                    //TODO 实现记录伤害事件
+
+                                    return 1;
+                                })
+                        )
+                )
         );
     }
 
+    //饰品信息获取
     private static String getAccessoryInfo(AccessoryItem accessoryItem)
     {
         StringBuilder sb = new StringBuilder();

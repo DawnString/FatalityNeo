@@ -1,0 +1,14 @@
+#Start in 2026/6/16 12/58 从此记录
+
+2026/6/16 13/26 完善了伤害计算。替换原版的伤害于护甲计算，使用自定义的
+-ArmorHandler
+-DamageHandler
+-MixinLivingEntityHurt
+-MixinLivingEntityArmor
+-WeaponItem
+-WeaponStats
+-WeaponType
+-FatalityCommand
+-AccessoryItem
+-TooltipHelper
+
