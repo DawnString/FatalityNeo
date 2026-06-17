@@ -20,3 +20,8 @@
 -DebugRecorder
 -MixinLivingEntityHurt
 
+2026/6/17 12/16 为WeaponItem添加了物品描述
+-WeaponItem
+
+
+

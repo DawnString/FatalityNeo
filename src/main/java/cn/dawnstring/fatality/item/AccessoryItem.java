@@ -29,7 +29,8 @@ public class AccessoryItem extends Item
     public void tick(Player player) {}
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag)
+    {
         StringBuilder att = new StringBuilder();
         for (StatModifier m : modifiers)
         {
