@@ -1,7 +1,5 @@
 {
-  "itemGroup.fatality": "示例模组标签页",
-  "block.fatality.example_block": "示例方块",
-  "item.fatality.example_item": "示例物品",
+
 
   "fatality.configuration.title": "Fatality 配置",
   "fatality.configuration.section.fatality.common.toml": "Fatality 配置",
@@ -27,5 +25,15 @@
   "attribute.movement_speed": "移动速度",
   "attribute.armor": "护甲",
   "attribute.armor_toughness": "护甲韧性",
-  "attribute.attack_speed": "攻击速度"
+  "attribute.attack_speed": "攻击速度",
+
+  "item.fatality.final_words": "终末之言",
+  "item.fatality.final_words.desc": "记载着世界终末知识的书籍",
+
+  "gui.fatality.final_words": "终末之言",
+  "gui.fatality.guide.no_content": "请选择一个条目",
+  "gui.fatality.guide.prev": "上一页",
+  "gui.fatality.guide.next": "下一页",
+  "gui.fatality.guide.related_items": "相关物品",
+  "gui.fatality.guide.empty": "暂无数据"
 }

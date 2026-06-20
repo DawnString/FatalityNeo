@@ -26,5 +26,15 @@
 2026/6/20 21/53 WeaponItem使用自定义TooltipHelper
 -WeaponItem
 
+2026/6/21 1/38 添加了终末之言，作为模组引导书
+-GuideCatagory
+-GuideEntry
+-GuidePage
+-GuideLoader
+-FinalWordsItem
+-FinalWordsScreen
+-TotemAnimationPayload
+-Fatality
+
 
 

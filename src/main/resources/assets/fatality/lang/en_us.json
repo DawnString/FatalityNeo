@@ -27,5 +27,15 @@
   "attribute.movement_speed": "Movement Speed",
   "attribute.armor": "Armor",
   "attribute.armor_toughness": "Armor Toughness",
-  "attribute.attack_speed": "Attack Speed"
+  "attribute.attack_speed": "Attack Speed",
+
+  "item.fatality.final_words": "Final Words",
+  "item.fatality.final_words.desc": "A book containing the knowledge of the end of this world",
+
+  "gui.fatality.final_words": "Final Words",
+  "gui.fatality.guide.no_content": "Select an entry",
+  "gui.fatality.guide.prev": "Prev",
+  "gui.fatality.guide.next": "Next",
+  "gui.fatality.guide.related_items": "Related Items",
+  "gui.fatality.guide.empty": "No data"
 }

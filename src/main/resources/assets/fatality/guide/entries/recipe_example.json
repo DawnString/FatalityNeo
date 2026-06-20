@@ -1,0 +1,18 @@
+{
+  "name": "配方页",
+  "icon": "minecraft:crafting_table",
+  "category": "fatality:examples",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "recipe",
+      "title": "合成配方示例",
+      "recipe": "minecraft:diamond_sword"
+    },
+    {
+      "type": "text",
+      "title": "关于配方页面",
+      "text": "§6recipe§r 页面类型用于展示合成配方。\n\n§erecipe§r 字段填写配方的 ID。\n\n会显示输出物品及其名称。\n\n鼠标移到输出物品上可查看详情。"
+    }
+  ]
+}
