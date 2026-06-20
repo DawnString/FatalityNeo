@@ -1,5 +1,6 @@
 package cn.dawnstring.fatality.item;
 
+import cn.dawnstring.fatality.utils.TooltipHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -32,11 +33,19 @@ public abstract class WeaponItem extends Item
             case MAGIC -> "魔法";
         };
 
-        tooltip.add(Component.literal("§7类型: §e" + typeName));
-        tooltip.add(Component.literal("§7面板伤害: §e" + String.format("%.1f", stats.baseDamage())));
-        tooltip.add(Component.literal("§7暴击率: §e" + String.format("%.1f", stats.critRate() * 100) + "%"));
-        tooltip.add(Component.literal("§7暴击伤害: §e+" + String.format("%.0f", stats.critDamage() * 100) + "%"));
-        tooltip.add(Component.literal("§7浮动系数: §e" + String.format("%.2f", stats.fluctuation())));
-        tooltip.add(Component.literal("§7攻击速度: §e" + String.format("%.1f", stats.attSpeed())));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(Component.literal("§7类型: §e" + typeName + "\n"));
+        stringBuilder.append(Component.literal("§7面板伤害: §e" + String.format("%.1f", stats.baseDamage())) + "\n");
+        stringBuilder.append(Component.literal("§7暴击率: §e" + String.format("%.1f", stats.critRate() * 100) + "%" + "\n"));
+        stringBuilder.append(Component.literal("§7暴击伤害: §e+" + String.format("%.0f", stats.critDamage() * 100) + "%") + "\n");
+        stringBuilder.append((Component.literal("§7浮动系数: §e" + String.format("%.2f", stats.fluctuation())) + "\n"));
+        stringBuilder.append(Component.literal("§7攻击速度: §e" + String.format("%.1f", stats.attSpeed())) + "\n");
+
+        TooltipHelper.addDescriptiveTooltip(
+                stack,
+                tooltip,
+                flag,
+                null,
+                stringBuilder.toString());
     }
 }
