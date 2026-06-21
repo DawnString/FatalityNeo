@@ -17,8 +17,6 @@ import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -421,8 +419,12 @@ public class FinalWordsScreen extends Screen
             if (entity instanceof LivingEntity living)
             {
                 int scale = Math.max(15, Math.min(35, (int) (30f / living.getBbHeight() * 1.5f)));
-                int ey = y + (int) (living.getBbHeight() * scale * 0.6f);
-                InventoryScreen.renderEntityInInventory(g, (float) cx, (float) ey, 0f, new Vector3f(scale, scale, scale), new Quaternionf().rotationY((float) Math.PI), new Quaternionf(), living);
+                living.yBodyRot = 180f;
+                living.setYRot(180f);
+                living.yHeadRot = 180f;
+                living.yHeadRotO = 180f;
+                int areaSize = 50;
+                InventoryScreen.renderEntityInInventoryFollowsAngle(g, cx - areaSize, y, cx + areaSize, y + 100, scale, 0f, 0f, 0f, living);
             }
         }
 

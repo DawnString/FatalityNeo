@@ -36,5 +36,8 @@
 -TotemAnimationPayload
 -Fatality
 
+2026/6/21 10/55 修复引导书实体页面不渲染
+-FinalWordsScreen
+
 
 
