@@ -6,7 +6,8 @@
     "MixinInventoryMenu",
     "ContainerSlotsAccessor",
     "MixinLivingEntityHurt",
-    "MixinLivngEntityArmor"
+    "MixinLivngEntityArmor",
+    "MixinAttribute"
   ],
   "client": [
     "ContainerScreenAccessor",
