@@ -7,6 +7,7 @@ import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforgespi.language.ModFileScanData;
 
 import java.lang.annotation.ElementType;
@@ -20,7 +21,7 @@ public class AutoItemRegistry
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(BuiltInRegistries.ITEM, Fatality.MODID);
 
-    public static final Map<ItemCategory, List<Item>> CATEGORY_ITEMS = new HashMap<>();
+    public static final Map<ItemCategory, List<DeferredHolder<Item, ? extends Item>>> CATEGORY_ITEMS = new HashMap<>();
 
     public static void registerItems(IEventBus eventBus)
     {
@@ -33,8 +34,9 @@ public class AutoItemRegistry
                         var clazz = loadClass(annotationData);
                         var annotation = clazz.getAnnotation(AutoItem.class);
 
-                        ITEMS.register(annotation.itemId(), ()->createInstance(clazz));
-                        CATEGORY_ITEMS.computeIfAbsent(annotation.category(), k-> new ArrayList<>());
+                        var regObj = ITEMS.register(annotation.itemId(), () -> createInstance(clazz));
+
+                        CATEGORY_ITEMS.computeIfAbsent(annotation.category(), k -> new ArrayList<>()).add(regObj);
                     });
         });
 

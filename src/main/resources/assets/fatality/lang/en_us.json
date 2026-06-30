@@ -29,6 +29,10 @@
   "attribute.armor_toughness": "Armor Toughness",
   "attribute.attack_speed": "Attack Speed",
 
+  "creativetab.fatality.misc": "Fatality | Misc",
+  "creativetab.fatality.accessory": "Fatality | Accessories",
+  "creativetab.fatality.weapon": "Fatality | Weapons",
+
   "item.fatality.final_words": "Final Words",
   "item.fatality.final_words.desc": "A book containing the knowledge of the end of this world",
 

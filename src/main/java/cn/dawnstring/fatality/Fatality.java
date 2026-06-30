@@ -3,6 +3,7 @@ package cn.dawnstring.fatality;
 import cn.dawnstring.fatality.guide.loader.GuideLoader;
 import cn.dawnstring.fatality.network.TotemAnimationPayload;
 import cn.dawnstring.fatality.register.AutoItemRegistry;
+import cn.dawnstring.fatality.register.ModCreativeTabs;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -32,6 +33,7 @@ public class Fatality
     public Fatality(IEventBus modEventBus, ModContainer modContainer)
     {
         AutoItemRegistry.registerItems(modEventBus);
+        ModCreativeTabs.register(modEventBus);
 
         modEventBus.addListener(RegisterPayloadHandlersEvent.class, event ->
         {

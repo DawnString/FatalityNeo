@@ -27,6 +27,10 @@
   "attribute.armor_toughness": "护甲韧性",
   "attribute.attack_speed": "攻击速度",
 
+  "creativetab.fatality.misc": "Fatality | 杂项",
+  "creativetab.fatality.accessory": "Fatality | 饰品",
+  "creativetab.fatality.weapon": "Fatality | 武器",
+
   "item.fatality.final_words": "终末之言",
   "item.fatality.final_words.desc": "记载着世界终末知识的书籍",
 
