@@ -26,26 +26,21 @@ public abstract class WeaponItem extends Item
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag)
     {
-        String typeName = switch (stats.weaponType())
-        {
-            case MELEE -> "近战";
-            case RANGED -> "远程";
-            case MAGIC -> "魔法";
-        };
+        String typeName = Component.translatable("weapon.fatality.type." + stats.weaponType().name().toLowerCase()).getString();
 
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(Component.literal("§7类型: §e" + typeName + "\n"));
-        stringBuilder.append(Component.literal("§7面板伤害: §e" + String.format("%.1f", stats.baseDamage())) + "\n");
-        stringBuilder.append(Component.literal("§7暴击率: §e" + String.format("%.1f", stats.critRate() * 100) + "%" + "\n"));
-        stringBuilder.append(Component.literal("§7暴击伤害: §e+" + String.format("%.0f", stats.critDamage() * 100) + "%") + "\n");
-        stringBuilder.append((Component.literal("§7浮动系数: §e" + String.format("%.2f", stats.fluctuation())) + "\n"));
-        stringBuilder.append(Component.literal("§7攻击速度: §e" + String.format("%.1f", stats.attSpeed())) + "\n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("§7").append(Component.translatable("weapon.fatality.type").getString()).append(": §e").append(typeName).append("\n");
+        sb.append("§7").append(Component.translatable("weapon.fatality.base_damage").getString()).append(": §e").append(String.format("%.1f", stats.baseDamage())).append("\n");
+        sb.append("§7").append(Component.translatable("weapon.fatality.crit_rate").getString()).append(": §e").append(String.format("%.1f", stats.critRate() * 100)).append("%\n");
+        sb.append("§7").append(Component.translatable("weapon.fatality.crit_damage").getString()).append(": §e+").append(String.format("%.0f", stats.critDamage() * 100)).append("%\n");
+        sb.append("§7").append(Component.translatable("weapon.fatality.fluctuation").getString()).append(": §e").append(String.format("%.2f", stats.fluctuation())).append("\n");
+        sb.append("§7").append(Component.translatable("weapon.fatality.attack_speed").getString()).append(": §e").append(String.format("%.1f", stats.attSpeed())).append("\n");
 
         TooltipHelper.addDescriptiveTooltip(
                 stack,
                 tooltip,
                 flag,
                 null,
-                stringBuilder.toString());
+                sb.toString());
     }
 }

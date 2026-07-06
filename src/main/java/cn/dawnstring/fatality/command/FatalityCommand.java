@@ -34,24 +34,52 @@ public class FatalityCommand
                                 var attrs = player.getCapability(ModCapabilities.PLAYER_ATTRIBUTES);
                                 if (attrs != null)
                                 {
-                                    source.sendSuccess(() -> Component.literal("=== 玩家属性 ==="), false);
-                                    source.sendSuccess(() -> Component.literal("§6[近战] §f基础: §e" + attrs.getMeleeDamageValueBonus() + " §f| 百分比: §e" + attrs.getMeleeDamagePercentBonus() + "% §f| 暴击: §e" + attrs.getMeleeCriticalDamageBonus()), false);
-                                    source.sendSuccess(() -> Component.literal("§6[远程] §f基础: §e" + attrs.getRangedDamageValueBonus() + " §f| 百分比: §e" + attrs.getRangedDamagePercentBonus() + "% §f| 暴击: §e" + attrs.getRangedCriticalDamageBonus()), false);
-                                    source.sendSuccess(() -> Component.literal("§6[魔法] §f基础: §e" + attrs.getMagicDamageValueBonus() + " §f| 百分比: §e" + attrs.getMagicDamagePercentBonus() + "% §f| 暴击: §e" + attrs.getMagicCriticalDamageBonus()), false);
-                                    source.sendSuccess(() -> Component.literal("§6[暴击率] §e" + (attrs.getCriticalHitRate() * 100) + "%"), false);
-                                    source.sendSuccess(() -> Component.literal("§6[基础伤害加成] §e" + attrs.getBaseDamagePercentBonus() + "%"), false);
-                                    source.sendSuccess(() -> Component.literal("§6[最大生命] §e" + attrs.getMaxHealthBonus()), false);
-                                    source.sendSuccess(() -> Component.literal("§6[攻击速度] §e" + attrs.getAttackSpeed()), false);
-                                    source.sendSuccess(() -> Component.literal("§6[魔力] §e" + attrs.getCurrentMana() + "§f/§e" + attrs.getMaxMana()), false);
-                                    source.sendSuccess(() -> Component.literal("§6[移动速度加成] §e" + attrs.getMoveSpeedBonus()), false);
-                                    source.sendSuccess(() -> Component.literal("§6[回复] §f生命: §e" + attrs.getRecoverHealthSpeedBonus() + " §f| 魔力: §e" + attrs.getRecoverManaSpeedBonus()), false);
-                                    source.sendSuccess(() -> Component.literal("§6[护甲] §f值: §e" + attrs.getArmor() + " §f| 韧性: §e" + attrs.getArmorToughness()), false);
-                                    source.sendSuccess(() -> Component.literal("§6[伤害减免] §e" + (attrs.getDamageReduction() * 100) + "%"), false);
-                                    source.sendSuccess(() -> Component.literal("§6[穿透抗性] §f值: §e" + attrs.getPenetrationResistance() + " §f| 系数: §e" + attrs.getPenetrationResistanceCoefficient()), false);
+                                    var melee = tr("command.fatality.melee");
+                                    var ranged = tr("command.fatality.ranged");
+                                    var magic = tr("command.fatality.magic");
+                                    var base = tr("command.fatality.base");
+                                    var pct = tr("command.fatality.percent");
+                                    var crit = tr("command.fatality.crit");
+                                    var critRate = tr("command.fatality.crit_rate");
+                                    var baseDmg = tr("command.fatality.base_damage_bonus");
+                                    var maxHp = tr("command.fatality.max_health");
+                                    var atkSpeed = tr("command.fatality.attack_speed");
+                                    var manaDisp = tr("command.fatality.mana_display");
+                                    var moveSpd = tr("command.fatality.move_speed");
+                                    var recov = tr("command.fatality.recovery");
+                                    var hp = tr("command.fatality.health");
+                                    var mana = tr("command.fatality.mana");
+                                    var arm = tr("command.fatality.armor");
+                                    var tough = tr("command.fatality.toughness");
+                                    var val = tr("command.fatality.value");
+                                    var dmgRed = tr("command.fatality.damage_reduction");
+                                    var penRes = tr("command.fatality.penetration_resist");
+                                    var penCoeff = tr("command.fatality.penetration_coeff");
+
+                                    source.sendSuccess(() -> Component.literal("§6" + tr("command.fatality.attribute_title")), false);
+                                    source.sendSuccess(() -> Component.literal(String.format("§6[%s] §f%s: §e%s §f| %s: §e%s%% §f| %s: §e%s",
+                                            melee, base, fmt(attrs.getMeleeDamageValueBonus()), pct, attrs.getMeleeDamagePercentBonus(), crit, fmt(attrs.getMeleeCriticalDamageBonus()))), false);
+                                    source.sendSuccess(() -> Component.literal(String.format("§6[%s] §f%s: §e%s §f| %s: §e%s%% §f| %s: §e%s",
+                                            ranged, base, fmt(attrs.getRangedDamageValueBonus()), pct, attrs.getRangedDamagePercentBonus(), crit, fmt(attrs.getRangedCriticalDamageBonus()))), false);
+                                    source.sendSuccess(() -> Component.literal(String.format("§6[%s] §f%s: §e%s §f| %s: §e%s%% §f| %s: §e%s",
+                                            magic, base, fmt(attrs.getMagicDamageValueBonus()), pct, attrs.getMagicDamagePercentBonus(), crit, fmt(attrs.getMagicCriticalDamageBonus()))), false);
+                                    source.sendSuccess(() -> Component.literal("§6[" + critRate + "] §e" + String.format("%.0f", attrs.getCriticalHitRate() * 100) + "%"), false);
+                                    source.sendSuccess(() -> Component.literal("§6[" + baseDmg + "] §e" + fmt(attrs.getBaseDamagePercentBonus()) + "%"), false);
+                                    source.sendSuccess(() -> Component.literal("§6[" + maxHp + "] §e" + attrs.getMaxHealthBonus()), false);
+                                    source.sendSuccess(() -> Component.literal("§6[" + atkSpeed + "] §e" + fmt(attrs.getAttackSpeed())), false);
+                                    source.sendSuccess(() -> Component.literal("§6[" + manaDisp + "] §e" + attrs.getCurrentMana() + "§f/§e" + attrs.getMaxMana()), false);
+                                    source.sendSuccess(() -> Component.literal("§6[" + moveSpd + "] §e" + fmt(attrs.getMoveSpeedBonus())), false);
+                                    source.sendSuccess(() -> Component.literal(String.format("§6[%s] §f%s: §e%s §f| %s: §e%s",
+                                            recov, hp, fmt(attrs.getRecoverHealthSpeedBonus()), mana, fmt(attrs.getRecoverManaSpeedBonus()))), false);
+                                    source.sendSuccess(() -> Component.literal(String.format("§6[%s] §f%s: §e%s §f| %s: §e%s",
+                                            arm, val, attrs.getArmor(), tough, fmt(attrs.getArmorToughness()))), false);
+                                    source.sendSuccess(() -> Component.literal("§6[" + dmgRed + "] §e" + String.format("%.0f", attrs.getDamageReduction() * 100) + "%"), false);
+                                    source.sendSuccess(() -> Component.literal(String.format("§6[%s] §f%s: §e%s §f| %s: §e%s",
+                                            penRes, val, fmt(attrs.getPenetrationResistance()), penCoeff, fmt(attrs.getPenetrationResistanceCoefficient()))), false);
                                 }
                                 else
                                 {
-                                    source.sendFailure(Component.literal("属性系统未加载"));
+                                    source.sendFailure(Component.translatable("command.fatality.system_not_loaded"));
                                 }
                             }
                             return 1;
@@ -77,15 +105,19 @@ public class FatalityCommand
                                            }
                                            else
                                            {
-                                               source.sendFailure(Component.literal("饰品栏无饰品"));
+                                               source.sendFailure(Component.translatable("command.fatality.error"));
                                            }
                                        }
                                    }
                                }
                                else
                                {
-                                   source.sendFailure(Component.literal("发生错误"));
+                                   source.sendFailure(Component.translatable("command.fatality.error"));
                                }
+                            }
+                            else
+                            {
+                                source.sendFailure(Component.translatable("command.fatality.no_accessory"));
                             }
                             return 1;
                         }))
@@ -99,18 +131,19 @@ public class FatalityCommand
                                         boolean nowActive = DebugRecorder.toggle(player.getUUID());
                                         if (nowActive)
                                         {
-                                            source.sendSuccess(() -> Component.literal("§a开始记录伤害数据"), false);
+                                            source.sendSuccess(() -> Component.translatable("command.fatality.debug_start").withStyle(style -> style.withColor(net.minecraft.ChatFormatting.GREEN)), false);
                                         }
                                         else
                                         {
                                             var records = DebugRecorder.flush(player.getUUID());
                                             if (records.isEmpty())
                                             {
-                                                source.sendSuccess(() -> Component.literal("§e未记录到任何伤害"), false);
+                                                source.sendSuccess(() -> Component.translatable("command.fatality.debug_no_data").withStyle(style -> style.withColor(net.minecraft.ChatFormatting.YELLOW)), false);
                                             }
                                             else
                                             {
-                                                source.sendSuccess(() -> Component.literal("§e=== 伤害记录 (" + records.size() + " 条) ==="), false);
+                                                String title = String.format(Component.translatable("command.fatality.debug_title").getString(), records.size());
+                                                source.sendSuccess(() -> Component.literal("§e" + title), false);
                                                 for (int idx = 0; idx < records.size(); idx++)
                                                 {
                                                     int i = idx;
@@ -118,7 +151,7 @@ public class FatalityCommand
                                                     source.sendSuccess(() -> Component.literal("§7" + index + ". " + records.get(i).format()), false);
                                                 }
                                             }
-                                            source.sendSuccess(() -> Component.literal("§c结束记录"), false);
+                                            source.sendSuccess(() -> Component.translatable("command.fatality.debug_end").withStyle(style -> style.withColor(net.minecraft.ChatFormatting.RED)), false);
                                         }
                                     }
                                     return 1;
@@ -142,13 +175,24 @@ public class FatalityCommand
             {
                 var mod = modifiers.get(i);
                 String sign = mod.value() >= 0 ? "+" : "";
-                sb.append("§f").append(mod.field()).append(": §a").append(sign).append(mod.value());
+                String fieldName = Component.translatable("stat.fatality." + mod.field()).getString();
+                sb.append("§f").append(fieldName).append(": §a").append(sign).append(fmt(mod.value()));
                 if (i < modifiers.size() - 1) sb.append("§7, ");
             }
             sb.append("§7]");
         }
 
         return sb.toString();
+    }
+
+    private static String fmt(float v)
+    {
+        return v == (int) v ? String.valueOf((int) v) : String.format("%.1f", v);
+    }
+
+    private static String tr(String key)
+    {
+        return Component.translatable(key).getString();
     }
 
     @SubscribeEvent

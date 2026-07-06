@@ -59,4 +59,13 @@
 -AccessoryItem
 -RandomUtil
 
+2026/7/6 17/30 实现i18n化
+-AccessoryItem
+-WeaponItem
+-TooltipHelper
+-FatalityCommand
+-DebugRecord
+-GuideLoader
+-FinalWordsScreen
+
 

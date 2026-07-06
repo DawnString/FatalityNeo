@@ -45,8 +45,10 @@ public class TooltipHelper
         // 默认显示提示信息
         if (!isShiftDown && !isAltDown)
         {
-            tooltip.add(Component.literal("§7按住§eAlt§7查看物品描述"));
-            tooltip.add(Component.literal("§7按住§eShift§7查看物品属性"));
+            String altKey = Component.translatable("key.fatality.alt").getString();
+            String shiftKey = Component.translatable("key.fatality.shift").getString();
+            tooltip.add(Component.literal("§7" + Component.translatable("tooltip.fatality.hold_alt", altKey).getString()));
+            tooltip.add(Component.literal("§7" + Component.translatable("tooltip.fatality.hold_shift", shiftKey).getString()));
             return;
         }
 
@@ -55,7 +57,7 @@ public class TooltipHelper
         {
             if (story != null && !story.isEmpty())
             {
-                tooltip.add(Component.literal("§6=== 物品描述 ==="));
+                tooltip.add(Component.literal("§6" + Component.translatable("tooltip.fatality.section_desc").getString()));
                 String[] storyLines = story.split("\n");
                 for (String line : storyLines)
                 {
@@ -64,7 +66,7 @@ public class TooltipHelper
             }
             else
             {
-                tooltip.add(Component.literal("§7暂无物品描述"));
+                tooltip.add(Component.literal("§7" + Component.translatable("tooltip.fatality.no_desc").getString()));
             }
         }
 
@@ -73,7 +75,7 @@ public class TooltipHelper
         {
             if (attributes != null && !attributes.isEmpty())
             {
-                tooltip.add(Component.literal("§6=== 物品属性 ==="));
+                tooltip.add(Component.literal("§6" + Component.translatable("tooltip.fatality.section_attr").getString()));
                 String[] attrLines = attributes.split("\n");
                 for (String line : attrLines)
                 {
@@ -82,7 +84,7 @@ public class TooltipHelper
             }
             else
             {
-                tooltip.add(Component.literal("§7暂无物品属性"));
+                tooltip.add(Component.literal("§7" + Component.translatable("tooltip.fatality.no_attr").getString()));
             }
         }
     }

@@ -78,9 +78,14 @@ public class FinalWordsScreen extends Screen
         rightLeft  = bookLeft + leftWidth + 2;
         rightWidth = bookWidth - leftWidth - 4;
 
-        // 确保引导数据已加载
-        if (GuideLoader.getCategories().isEmpty())
+        // 确保引导数据已加载，且语言匹配当前游戏语言
+        String gameLang = minecraft.getLanguageManager().getSelected();
+        boolean langChanged = !gameLang.equals(GuideLoader.getCurrentLang());
+        if (langChanged || GuideLoader.getCategories().isEmpty())
+        {
+            GuideLoader.setLang(gameLang);
             GuideLoader.load(minecraft.getResourceManager());
+        }
 
         buildTree();
         selectFirstWithEntry();
