@@ -12,6 +12,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -144,6 +145,27 @@ public class AccessoryManager
             if (stack.getItem() instanceof AccessoryItem acc)
                 acc.tick(player);
         }
+    }
+
+    //返回是否取消事件
+    //true取消 false不取消
+    public static boolean onAttacked(Player player, DamageSource source, float amount)
+    {
+        SimpleContainer inv = getInventory(player);
+        boolean result = false;
+        for (int i = 0; i < SLOT_COUNT; i++)
+        {
+            ItemStack stack = inv.getItem(i);
+            if (stack.getItem() instanceof AccessoryItem acc)
+            {
+                if (acc.onAttacked(player, source, amount))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public static void save(Player player)

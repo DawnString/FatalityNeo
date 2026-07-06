@@ -3,6 +3,7 @@ package cn.dawnstring.fatality.item;
 import cn.dawnstring.fatality.Fatality;
 import cn.dawnstring.fatality.utils.TooltipHelper;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -14,10 +15,11 @@ import java.util.List;
 public class AccessoryItem extends Item
 {
     private final List<StatModifier> modifiers;
+    private String uniqueDes;
 
-    public AccessoryItem(Properties properties, List<StatModifier> modifiers)
+    public AccessoryItem(List<StatModifier> modifiers)
     {
-        super(properties.stacksTo(1).durability(0).rarity(Rarity.RARE).setNoRepair());
+        super(new Properties().stacksTo(1).durability(0).rarity(Rarity.RARE).setNoRepair());
         this.modifiers = modifiers;
     }
 
@@ -26,7 +28,19 @@ public class AccessoryItem extends Item
         return modifiers;
     }
 
+    //tick
     public void tick(Player player) {}
+
+    //被攻击触发
+    public boolean onAttacked(Player player, DamageSource source, float amount)
+    {
+        return false;
+    }
+
+    public void setUniqueDes(String uniqueDes)
+    {
+        this.uniqueDes = uniqueDes;
+    }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag)
@@ -71,6 +85,7 @@ public class AccessoryItem extends Item
             boolean isPercent = switch (m.field())
             {
                 case "meleeDamagePercentBonus", "rangedDamagePercentBonus", "magicDamagePercentBonus",
+                     "meleeCriticalDamageBonus", "rangedCriticalDamageBonus", "magicCriticalDamageBonus",
                      "criticalHitRate", "baseDamagePercentBonus",
                      "damageReduction", "penetrationResistance", "penetrationResistanceCoefficient" -> true;
                 default -> false;
@@ -83,6 +98,8 @@ public class AccessoryItem extends Item
 
             att.append("\n");
         }
+        att.append(uniqueDes);
+        att.append("\n");
         TooltipHelper.addDescriptiveTooltip(stack,
                 tooltip,
                 flag,

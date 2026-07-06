@@ -7,6 +7,8 @@ import cn.dawnstring.fatality.core.network.SyncAttributesPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -62,5 +64,17 @@ public class ModEvents
     {
         PlayerAttributesProvider.getAttributes(event.getEntity()).tick();
         AccessoryManager.tick(event.getEntity());
+    }
+
+    @SubscribeEvent
+    public static void onPlayerHurt(LivingIncomingDamageEvent event)
+    {
+        boolean r = false;
+        if (event.getEntity() instanceof ServerPlayer player)
+        {
+            r = AccessoryManager.onAttacked(player, event.getSource(), event.getAmount());
+        }
+
+        event.setCanceled(r);
     }
 }
