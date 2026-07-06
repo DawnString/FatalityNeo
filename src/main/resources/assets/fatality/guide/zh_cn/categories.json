@@ -1,0 +1,14 @@
+[
+  {
+    "id": "fatality:examples",
+    "name": "示例分类",
+    "icon": "minecraft:book",
+    "sortnum": 0,
+    "entries": [
+      "fatality:text_example",
+      "fatality:spotlight_example",
+      "fatality:entity_example",
+      "fatality:recipe_example"
+    ]
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "name": "Recipe Page",
+  "icon": "minecraft:crafting_table",
+  "category": "fatality:examples",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "recipe",
+      "title": "Crafting Recipe Example",
+      "recipe": "minecraft:diamond_sword"
+    },
+    {
+      "type": "text",
+      "title": "About Recipe Pages",
+      "text": "§6recipe§r page type displays crafting recipes.\n\n§erecipe§r specifies the recipe ID.\n\nThe output item and its name will be shown.\n\nHover over the output to see its details."
+    }
+  ]
+}

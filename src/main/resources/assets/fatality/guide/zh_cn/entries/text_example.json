@@ -1,0 +1,18 @@
+{
+  "name": "文本页",
+  "icon": "minecraft:written_book",
+  "category": "fatality:examples",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "text",
+      "title": "文本页面示例",
+      "text": "这是文本页面的内容。\n\n你可以使用 §e颜色代码§r 来染色文本。\n\n§7换行使用 \\n§r。\n\n§6你也可以在下方展示关联物品§r",
+      "items": [
+        "minecraft:diamond",
+        "minecraft:diamond_sword",
+        "minecraft:diamond_chestplate"
+      ]
+    }
+  ]
+}

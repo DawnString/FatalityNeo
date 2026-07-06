@@ -1,0 +1,19 @@
+{
+  "name": "Entity Page",
+  "icon": "minecraft:spider_eye",
+  "category": "fatality:examples",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "entity",
+      "title": "Entity Page Example",
+      "entity": "minecraft:spider",
+      "text": "This is an entity page.\n\n§eentity§r specifies the entity ID.\n\n§etitle§r is the page title.\n\n§etext§r is the description text.\n\nThe entity name is displayed automatically."
+    },
+    {
+      "type": "text",
+      "title": "About Entity Pages",
+      "text": "§6entity§r page type is used to introduce mobs or NPCs.\n\nDescribe their behavior, drops, spawn locations, etc.\n\nSupports all vanilla and modded entities."
+    }
+  ]
+}

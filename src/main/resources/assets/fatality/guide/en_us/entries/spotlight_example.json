@@ -1,0 +1,19 @@
+{
+  "name": "Item Spotlight Page",
+  "icon": "minecraft:diamond",
+  "category": "fatality:examples",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "item_spotlight",
+      "title": "Item Spotlight Example",
+      "item": "minecraft:diamond_sword",
+      "text": "This is an item spotlight page.\n\n§eitem§r specifies the item ID to display.\n\n§etitle§r is the page title.\n\n§etext§r is the description text. Hover over the item to see details."
+    },
+    {
+      "type": "text",
+      "title": "About Item Spotlight",
+      "text": "§6item_spotlight§r page type is used to highlight a single item.\n\nGreat for showcasing key items, weapons, tools, etc.\n\nHovering over the item shows its full tooltip."
+    }
+  ]
+}

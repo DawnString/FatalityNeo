@@ -1,0 +1,18 @@
+{
+  "name": "Text Page",
+  "icon": "minecraft:written_book",
+  "category": "fatality:examples",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Text Page Example",
+      "text": "This is the content of a text page.\n\nYou can use §ecolor codes§r to style text.\n\n§7Newlines use \\n§r.\n\n§6You can also display related items below§r",
+      "items": [
+        "minecraft:diamond",
+        "minecraft:diamond_sword",
+        "minecraft:diamond_chestplate"
+      ]
+    }
+  ]
+}
