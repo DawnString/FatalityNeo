@@ -3,9 +3,6 @@
   "creativetab.fatality.accessory": "Fatality | 饰品",
   "creativetab.fatality.weapon": "Fatality | 武器",
 
-  "item.fatality.final_words": "终末之言",
-  "item.fatality.final_words.desc": "记载着世界知识的书籍",
-
   "stat.fatality.meleeDamageValueBonus": "近战攻击力",
   "stat.fatality.meleeDamagePercentBonus": "近战伤害百分比",
   "stat.fatality.meleeCriticalDamageBonus": "近战暴击伤害",
@@ -94,6 +91,9 @@
 
   "key.fatality.alt": "Alt",
   "key.fatality.shift": "Shift",
+
+  "item.fatality.final_words": "终末之言",
+  "item.fatality.final_words.desc": "记载着世界知识的书籍",
 
   "item.fatality.aiming_lens": "瞄准透镜",
   "item.fatality.aiming_lens.desc": "精准的瞄准镜片，提升远程暴击能力。",

@@ -41,6 +41,7 @@ public abstract class WeaponItem extends Item
                 tooltip,
                 flag,
                 null,
-                sb.toString());
+                sb.toString() ,
+                false);
     }
 }

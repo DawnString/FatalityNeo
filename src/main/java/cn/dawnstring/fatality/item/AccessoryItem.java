@@ -74,6 +74,7 @@ public class AccessoryItem extends Item
                 tooltip,
                 flag,
                 null,
-                att.toString());
+                att.toString(),
+                false);
     }
 }

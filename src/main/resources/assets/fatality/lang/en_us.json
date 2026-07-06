@@ -3,9 +3,6 @@
   "creativetab.fatality.accessory": "Fatality | Accessories",
   "creativetab.fatality.weapon": "Fatality | Weapons",
 
-  "item.fatality.final_words": "Final Words",
-  "item.fatality.final_words.desc": "A book containing the knowledge of this world",
-
   "stat.fatality.meleeDamageValueBonus": "Melee Attack",
   "stat.fatality.meleeDamagePercentBonus": "Melee Damage %",
   "stat.fatality.meleeCriticalDamageBonus": "Melee Crit Damage",
@@ -94,6 +91,9 @@
 
   "key.fatality.alt": "Alt",
   "key.fatality.shift": "Shift",
+
+  "item.fatality.final_words": "Final Words",
+  "item.fatality.final_words.desc": "A book containing the knowledge of this world",
 
   "item.fatality.aiming_lens": "Aiming Lens",
   "item.fatality.aiming_lens.desc": "A precision lens that enhances ranged critical ability.",

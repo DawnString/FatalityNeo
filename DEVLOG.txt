@@ -68,4 +68,10 @@
 -GuideLoader
 -FinalWordsScreen
 
+2026/7/7 0/40 加了点彩虹字
+-FinalWordsItem
+-AccessoryItem
+-WeaponItem
+-TooltipHelper
+
 

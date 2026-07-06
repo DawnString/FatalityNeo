@@ -12,6 +12,8 @@ import java.util.List;
 
 public class TooltipHelper
 {
+    private static final String RAINBOW_COLORS = "c6eab9d";
+
     private static boolean isAltDown()
     {
         long window = Minecraft.getInstance().getWindow().getWindow();
@@ -26,6 +28,17 @@ public class TooltipHelper
                 GLFW.glfwGetKey(window, GLFW.GLFW_KEY_RIGHT_SHIFT) == GLFW.GLFW_PRESS;
     }
 
+    public static void addDefaultTooltip(List<Component> tooltip, String description, boolean isRainbow)
+    {
+        if (description != null && !description.isEmpty())
+        {
+            String display = isRainbow ? rainbow(description) : "§7" + description;
+            String[] lines = display.split("\n");
+            for (String line : lines)
+                tooltip.add(Component.literal(line));
+        }
+    }
+
     /**
      * 添加物品描述工具提示
      * @param stack 物品堆栈
@@ -35,7 +48,7 @@ public class TooltipHelper
      * @param attributes 物品属性描述
      */
     public static void addDescriptiveTooltip(ItemStack stack, List<Component> tooltip,
-                                             TooltipFlag flag, String story, String attributes)
+                                             TooltipFlag flag, String story, String attributes, boolean isRainbow)
     {
         // 检查是否按住Shift键
         boolean isShiftDown = isShiftDown();
@@ -75,17 +88,38 @@ public class TooltipHelper
         {
             if (attributes != null && !attributes.isEmpty())
             {
+                String display = isRainbow ? rainbow(attributes) : attributes;
                 tooltip.add(Component.literal("§6" + Component.translatable("tooltip.fatality.section_attr").getString()));
                 String[] attrLines = attributes.split("\n");
-                for (String line : attrLines)
-                {
-                    tooltip.add(Component.literal("§e" + line));
-                }
+                for (String line : display.split("\n"))
+                    tooltip.add(Component.literal(line));
             }
             else
             {
                 tooltip.add(Component.literal("§7" + Component.translatable("tooltip.fatality.no_attr").getString()));
             }
         }
+    }
+
+    /**
+     * 将纯文本转换为动态彩虹文字，颜色随时间滚动
+     * 每帧调用时 System.currentTimeMillis() 不同 → 偏移量不同 → 颜色滚动
+     */
+    public static String rainbow(String text)
+    {
+        // 先剥掉已有的 § 颜色码（如果有）
+        String plain = text.replaceAll("§[0-9a-fklmnor]", "");
+
+        long time = System.currentTimeMillis();
+        int shift = (int)((time / 60) % RAINBOW_COLORS.length());
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < plain.length(); i++)
+        {
+            int idx = (shift + i) % RAINBOW_COLORS.length();
+            sb.append('§').append(RAINBOW_COLORS.charAt(idx));
+            sb.append(plain.charAt(i));
+        }
+        return sb.toString();
     }
 }
