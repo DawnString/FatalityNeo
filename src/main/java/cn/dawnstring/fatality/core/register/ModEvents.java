@@ -1,12 +1,14 @@
 package cn.dawnstring.fatality.core.register;
 
 import cn.dawnstring.fatality.Fatality;
+import cn.dawnstring.fatality.core.ability.AbilitySystem;
 import cn.dawnstring.fatality.core.accessory.AccessoryManager;
 import cn.dawnstring.fatality.core.capability.PlayerAttributesProvider;
 import cn.dawnstring.fatality.core.network.SyncAttributesPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -68,12 +70,35 @@ public class ModEvents
     @SubscribeEvent
     public static void onPlayerHurt(LivingIncomingDamageEvent event)
     {
-        boolean r = false;
         if (event.getEntity() instanceof ServerPlayer player)
         {
-            r = AccessoryManager.onAttacked(player, event.getSource(), event.getAmount());
+            if (AccessoryManager.onAttacked(player, event.getSource(), event.getAmount()))
+            {
+                event.setCanceled(true);
+                return;
+            }
+
+            float modified = AbilitySystem.onHurt(player, event.getSource(), event.getAmount());
+            if (modified <= 0)
+                event.setCanceled(true);
+            else if (modified != event.getAmount())
+                event.setAmount(modified);
         }
 
-        event.setCanceled(r);
+        if (event.getSource().getEntity() instanceof ServerPlayer attacker && event.getEntity() != attacker)
+        {
+            float modified = AbilitySystem.modifyOutgoingDamage(attacker, event.getEntity(), event.getAmount());
+            if (modified != event.getAmount())
+                event.setAmount(modified);
+            if (modified > 0)
+                AbilitySystem.onHit(attacker, event.getEntity(), modified);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLivingDeath(LivingDeathEvent event)
+    {
+        if (event.getSource().getEntity() instanceof ServerPlayer player)
+            AbilitySystem.onKill(player, event.getEntity());
     }
 }

@@ -22,6 +22,7 @@ import java.util.Random;
 public class DamageHandler
 {
     private static final Random RANDOM = new Random();
+    public static final ThreadLocal<Boolean> LAST_HIT_CRIT = new ThreadLocal<>();
 
     public static float apply(Player attacker, LivingEntity target, DamageSource source, float amount)
     {
@@ -107,6 +108,9 @@ public class DamageHandler
         {
             DebugRecorder.stageArmor(attacker.getUUID(), target.getUUID(), damage, false);
         }
+
+        //暴击判断
+        LAST_HIT_CRIT.set(isCrit);
 
         return Math.max(0, damage);
     }

@@ -1,6 +1,7 @@
 package cn.dawnstring.fatality.core.accessory;
 
 import cn.dawnstring.fatality.Fatality;
+import cn.dawnstring.fatality.core.ability.AbilitySystem;
 import cn.dawnstring.fatality.core.capability.PlayerAttributes;
 import cn.dawnstring.fatality.core.capability.PlayerAttributesProvider;
 import cn.dawnstring.fatality.core.register.ModCapabilities;
@@ -145,6 +146,7 @@ public class AccessoryManager
             if (stack.getItem() instanceof AccessoryItem acc)
                 acc.tick(player);
         }
+        AbilitySystem.tick(player);
     }
 
     //返回是否取消事件

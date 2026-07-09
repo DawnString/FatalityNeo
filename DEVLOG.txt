@@ -78,4 +78,12 @@
 -内容过多，不写
 -目录在item/accessory下
 
+2026/7/9 添加了新系统Ability,添加语言文件
+-Ability
+-AbilitySystem
+-AcceessoryManager
+-ModEvents
+-ParticleUtil
+-饰品特殊效果
+
 
