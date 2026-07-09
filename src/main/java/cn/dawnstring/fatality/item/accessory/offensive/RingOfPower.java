@@ -1,4 +1,4 @@
-package cn.dawnstring.fatality.item.accessory;
+package cn.dawnstring.fatality.item.accessory.offensive;
 
 
 import cn.dawnstring.fatality.item.AccessoryItem;
