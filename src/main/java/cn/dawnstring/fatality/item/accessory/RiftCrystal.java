@@ -7,14 +7,14 @@ import cn.dawnstring.fatality.register.AutoItem;
 
 import java.util.List;
 
-@AutoItem(itemId = "aiming_lens", category = ItemCategory.ACCESSORY)
-public class AimingLens extends AccessoryItem
+@AutoItem(itemId = "rift_crystal", category = ItemCategory.ACCESSORY)
+public class RiftCrystal extends AccessoryItem
 {
-    public  AimingLens()
+    public  RiftCrystal()
     {
         super(List.of(
-                new StatModifier("criticalHitRate", 0.05f),
-                new StatModifier("rangedCriticalDamageBonus", 0.04f)
+                new StatModifier("mana", 25),
+                new StatModifier("magicDamagePercentBonus", 0.08f)
         ));
     }
 }

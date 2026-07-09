@@ -4,9 +4,6 @@ import cn.dawnstring.fatality.item.AccessoryItem;
 import cn.dawnstring.fatality.item.ItemCategory;
 import cn.dawnstring.fatality.item.StatModifier;
 import cn.dawnstring.fatality.register.AutoItem;
-import cn.dawnstring.fatality.utils.RandomUtil;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.player.Player;
 
 import java.util.List;
 
@@ -21,9 +18,4 @@ public class WatchersEye extends AccessoryItem
         ));
     }
 
-    @Override
-    public boolean onAttacked(Player player, DamageSource source, float amount)
-    {
-        return RandomUtil.hitProbability(5);
-    }
 }

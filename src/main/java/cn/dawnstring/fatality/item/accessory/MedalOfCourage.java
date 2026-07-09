@@ -13,8 +13,8 @@ public class MedalOfCourage extends AccessoryItem
     public  MedalOfCourage()
     {
         super(List.of(
-                new StatModifier("meleeDamagePercentBonus", 0.06f),
-                new StatModifier("criticalHitRate", 0.04f)
+                new StatModifier("meleeDamagePercentBonus", 0.04f),
+                new StatModifier("criticalHitRate", 0.03f)
         ));
     }
 }

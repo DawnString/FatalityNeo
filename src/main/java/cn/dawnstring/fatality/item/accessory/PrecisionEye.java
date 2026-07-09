@@ -4,17 +4,16 @@ import cn.dawnstring.fatality.item.AccessoryItem;
 import cn.dawnstring.fatality.item.ItemCategory;
 import cn.dawnstring.fatality.item.StatModifier;
 import cn.dawnstring.fatality.register.AutoItem;
-
 import java.util.List;
 
-@AutoItem(itemId = "aiming_lens", category = ItemCategory.ACCESSORY)
-public class AimingLens extends AccessoryItem
+@AutoItem(itemId = "precision_eye", category = ItemCategory.ACCESSORY)
+public class PrecisionEye extends AccessoryItem
 {
-    public  AimingLens()
+    public PrecisionEye()
     {
         super(List.of(
-                new StatModifier("criticalHitRate", 0.05f),
-                new StatModifier("rangedCriticalDamageBonus", 0.04f)
+                new StatModifier("criticalHitRate", 0.08f),
+                new StatModifier("rangedCriticalDamageBonus", 0.10f)
         ));
     }
 }

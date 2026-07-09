@@ -74,4 +74,8 @@
 -WeaponItem
 -TooltipHelper
 
+2026/7/9 15/12 添加了105种饰品
+-内容过多，不写
+-目录在item/accessory下
+
 

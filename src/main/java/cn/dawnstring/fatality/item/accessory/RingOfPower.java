@@ -14,7 +14,7 @@ public class RingOfPower extends AccessoryItem
     public  RingOfPower()
     {
         super(List.of(
-                new StatModifier("meleeDamageValueBonus", 8f)
+                new StatModifier("meleeDamageValueBonus", 3)
         ));
     }
 }

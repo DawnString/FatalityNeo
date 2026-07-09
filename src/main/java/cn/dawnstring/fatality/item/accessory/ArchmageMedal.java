@@ -4,17 +4,16 @@ import cn.dawnstring.fatality.item.AccessoryItem;
 import cn.dawnstring.fatality.item.ItemCategory;
 import cn.dawnstring.fatality.item.StatModifier;
 import cn.dawnstring.fatality.register.AutoItem;
-
 import java.util.List;
 
-@AutoItem(itemId = "aiming_lens", category = ItemCategory.ACCESSORY)
-public class AimingLens extends AccessoryItem
+@AutoItem(itemId = "archmage_medal", category = ItemCategory.ACCESSORY)
+public class ArchmageMedal extends AccessoryItem
 {
-    public  AimingLens()
+    public ArchmageMedal()
     {
         super(List.of(
-                new StatModifier("criticalHitRate", 0.05f),
-                new StatModifier("rangedCriticalDamageBonus", 0.04f)
+                new StatModifier("magicCriticalDamageBonus", 0.25f),
+                new StatModifier("recoverManaSpeedBonus", 0.08f)
         ));
     }
 }

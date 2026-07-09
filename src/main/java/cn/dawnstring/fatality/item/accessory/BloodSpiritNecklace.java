@@ -4,17 +4,16 @@ import cn.dawnstring.fatality.item.AccessoryItem;
 import cn.dawnstring.fatality.item.ItemCategory;
 import cn.dawnstring.fatality.item.StatModifier;
 import cn.dawnstring.fatality.register.AutoItem;
-
 import java.util.List;
 
-@AutoItem(itemId = "aiming_lens", category = ItemCategory.ACCESSORY)
-public class AimingLens extends AccessoryItem
+@AutoItem(itemId = "blood_spirit_necklace", category = ItemCategory.ACCESSORY)
+public class BloodSpiritNecklace extends AccessoryItem
 {
-    public  AimingLens()
+    public BloodSpiritNecklace()
     {
         super(List.of(
-                new StatModifier("criticalHitRate", 0.05f),
-                new StatModifier("rangedCriticalDamageBonus", 0.04f)
+                new StatModifier("meleeDamageValueBonus", 16),
+                new StatModifier("meleeCriticalDamageBonus", 0.18f)
         ));
     }
 }

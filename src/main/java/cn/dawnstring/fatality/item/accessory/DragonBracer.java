@@ -4,15 +4,16 @@ import cn.dawnstring.fatality.item.AccessoryItem;
 import cn.dawnstring.fatality.item.ItemCategory;
 import cn.dawnstring.fatality.item.StatModifier;
 import cn.dawnstring.fatality.register.AutoItem;
-
 import java.util.List;
 
-@AutoItem(itemId = "amulet_of_precision", category = ItemCategory.ACCESSORY)
-public class AmuletOfPrecision extends AccessoryItem
+@AutoItem(itemId = "dragon_bracer", category = ItemCategory.ACCESSORY)
+public class DragonBracer extends AccessoryItem
 {
-    public  AmuletOfPrecision()
+    public DragonBracer()
     {
         super(List.of(
+                new StatModifier("rangedDamageValueBonus", 8),
+                new StatModifier("rangedCriticalDamageBonus", 0.15f),
                 new StatModifier("criticalHitRate", 0.04f)
         ));
     }
