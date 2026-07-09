@@ -27,7 +27,7 @@ public class CreationCore extends AccessoryItem implements Ability
                 new StatModifier("magicCriticalDamageBonus", 0.15f)
         ));
 
-        setUniqueDes(Component.translatable("item.fatality.creation_core.unique").toString());
+        setUniqueDes(Component.translatable("item.fatality.creation_core.unique"));
     }
 
     @Override

@@ -86,6 +86,7 @@
   "key.fatality.shift": "Shift",
 
   "item.fatality.final_words": "Final Words",
+  "item.fatality.final_words.desc":"The world's end is where your journey begins.",
 
   "item.fatality.aiming_lens": "Aiming Lens",
   "item.fatality.amulet_of_precision": "Amulet of Precision",
@@ -185,7 +186,7 @@
   "item.fatality.withering_bloom": "Withering Bloom",
   "item.fatality.spirit_bracer": "Spirit Bracer",
   "item.fatality.emblem_of_finality": "Emblem of Finality",
-  "item.fatality.emblem_of_finality.unqiue": "Increases damage by 2 times every 5th attack",
+  "item.fatality.emblem_of_finality.unique": "Increases damage by 2 times every 5th attack",
   "item.fatality.seal_of_ruin": "Seal of Ruin",
   "item.fatality.seal_of_ruin.unique": "When health is below 20%, damage increases by 50%",
   "item.fatality.void_eye": "Void Eye",

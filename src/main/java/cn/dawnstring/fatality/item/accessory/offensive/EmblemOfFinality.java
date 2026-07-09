@@ -23,7 +23,7 @@ public class EmblemOfFinality extends AccessoryItem implements Ability
                 new StatModifier("attackSpeed", 0.10f)
         ));
 
-        setUniqueDes(Component.translatable("item.fatality.emblem_of_finality.unqiue").toString());
+        setUniqueDes(Component.translatable("item.fatality.emblem_of_finality.unique"));
     }
 
     @Override

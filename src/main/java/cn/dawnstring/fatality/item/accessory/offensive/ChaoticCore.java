@@ -23,7 +23,7 @@ public class ChaoticCore extends AccessoryItem implements Ability
                 new StatModifier("magicCriticalDamageBonus", 0.08f)
         ));
 
-        setUniqueDes(Component.translatable("item.fatality.chaotic_core.unique").toString());
+        setUniqueDes(Component.translatable("item.fatality.chaotic_core.unique"));
     }
 
     @Override

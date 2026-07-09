@@ -23,7 +23,7 @@ public class SealOfRuin extends AccessoryItem implements Ability
                 new StatModifier("magicCriticalDamageBonus", 0.20f)
         ));
 
-        setUniqueDes(Component.translatable("item.fatality.seal_of_ruin.unique").toString());
+        setUniqueDes(Component.translatable("item.fatality.seal_of_ruin.unique"));
     }
 
     @Override

@@ -21,7 +21,7 @@ public class FleshHeart extends AccessoryItem implements Ability
                 new StatModifier("maxHealth", 20)
         ));
 
-        setUniqueDes(Component.translatable("item.fatality.flesh_heart.unique").toString());
+        setUniqueDes(Component.translatable("item.fatality.flesh_heart.unique"));
     }
 
     @Override

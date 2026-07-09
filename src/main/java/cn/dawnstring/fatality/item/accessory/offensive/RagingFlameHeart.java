@@ -21,7 +21,7 @@ public class RagingFlameHeart extends AccessoryItem implements Ability
                 new StatModifier("attackSpeed", 0.06f)
         ));
 
-        setUniqueDes(Component.translatable("item.fatality.raging_flame_heart.unique").toString());
+        setUniqueDes(Component.translatable("item.fatality.raging_flame_heart.unique"));
     }
 
     @Override

@@ -26,7 +26,7 @@ public class WatchersEye extends AccessoryItem implements Ability
                 new StatModifier("armor", 2)
         ));
 
-        setUniqueDes(Component.translatable("item.fatality.watchers_eye.unique").toString());
+        setUniqueDes(Component.translatable("item.fatality.watchers_eye.unique"));
     }
 
     @Override

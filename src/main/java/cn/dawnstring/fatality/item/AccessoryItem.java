@@ -15,7 +15,7 @@ import java.util.List;
 public class AccessoryItem extends Item
 {
     private final List<StatModifier> modifiers;
-    private String uniqueDes;
+    private Component uniqueDes;
 
     public AccessoryItem(List<StatModifier> modifiers)
     {
@@ -37,7 +37,7 @@ public class AccessoryItem extends Item
         return false;
     }
 
-    public void setUniqueDes(String uniqueDes)
+    public void setUniqueDes(Component uniqueDes)
     {
         this.uniqueDes = uniqueDes;
     }
@@ -69,7 +69,7 @@ public class AccessoryItem extends Item
             att.append("\n");
         }
         if (uniqueDes != null)
-            att.append(uniqueDes).append("\n");
+            att.append(uniqueDes.getString()).append("\n");
         TooltipHelper.addDescriptiveTooltip(stack,
                 tooltip,
                 flag,
