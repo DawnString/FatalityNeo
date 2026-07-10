@@ -183,7 +183,7 @@ public class AccessoryManager
             ItemStack stack = container.getItem(i);
             if (!stack.isEmpty())
             {
-                tag.put("item", stack.save(RegistryAccess.EMPTY, new CompoundTag()));
+                tag.put("item", stack.save(player.registryAccess(), new CompoundTag()));
             }
             list.add(tag);
         }
@@ -199,7 +199,7 @@ public class AccessoryManager
             if (tag.contains("item"))
             {
                 int finalI = i;
-                ItemStack.parse(RegistryAccess.EMPTY, tag.getCompound("item"))
+                ItemStack.parse(player.registryAccess(), tag.getCompound("item"))
                         .ifPresent(itemStack -> accessory.setItem(finalI, itemStack));
             }
         }
@@ -209,5 +209,16 @@ public class AccessoryManager
     {
         serverMap.remove(uuid);
         clientMap.remove(uuid);
+    }
+
+    /**
+     * 原地刷新饰品容器
+     */
+    public static void reload(Player player)
+    {
+        SimpleContainer inv = getInventory(player);
+        for (int i = 0; i < SLOT_COUNT; i++)
+            inv.setItem(i, ItemStack.EMPTY);
+        load(player, inv);
     }
 }

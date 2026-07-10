@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
-public class MixinLivngEntityArmor
+public class MixinLivingEntityArmor
 {
     @Inject(method = "getDamageAfterArmorAbsorb", at = @At("HEAD"), cancellable = true)
     private void onArmorCalc(DamageSource source, float damage, CallbackInfoReturnable<Float> cir)

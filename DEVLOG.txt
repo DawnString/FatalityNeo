@@ -89,4 +89,19 @@
 2026/7/9 23/52 修复小问题，i18n未能正确翻译
 -AccessoryItem
 
-
+2026/7/10 添加了翅膀基类与按键帮手，按键检测方面使用了较复杂的服务端-客户端检测
+由客户端发包给服务端确认运动状态，然后客户端再读取
+-BaseWingItem
+-WingUtil
+-KeyUtil
+-ClientInputHandler
+-PlayerInputState
+-PlayerInputPayload
+-LivingEntityAccessor
+解决遗留bug，退出重进导致饰品消失
+先想到了AccessoryManager中的RegistryAccess.EMPTY的影响
+然后是单人档与服务器的区别，PlayerEvent.PlayerLoggedOutEvent与ServerStoppingEvent
+最后发现是类加载的问题，玩家背包初始化太早，导致创建了新的空容器
+而不是使用load()进行加载
+-AccessoryManager
+-ModEvents

@@ -1,6 +1,8 @@
 package cn.dawnstring.fatality;
 
 import cn.dawnstring.fatality.guide.loader.GuideLoader;
+import cn.dawnstring.fatality.core.input.PlayerInputState;
+import cn.dawnstring.fatality.network.PlayerInputPayload;
 import cn.dawnstring.fatality.network.TotemAnimationPayload;
 import cn.dawnstring.fatality.register.AutoItemRegistry;
 import cn.dawnstring.fatality.register.ModCreativeTabs;
@@ -47,6 +49,16 @@ public class Fatality
                                         ResourceLocation.parse("fatality:final_words"))));
                         if (mc.player != null)
                             mc.player.playSound(net.minecraft.sounds.SoundEvents.TOTEM_USE, 1.0f, 1.0f);
+                    });
+            registrar.playToServer(
+                    PlayerInputPayload.TYPE,
+                    PlayerInputPayload.STREAM_CODEC,
+                    (payload, context) ->
+                    {
+                        var player = context.player();
+                        PlayerInputState.update(player.getUUID(),
+                                payload.jumping(), payload.sneaking(),
+                                payload.forwardImpulse(), payload.leftImpulse());
                     });
         });
 

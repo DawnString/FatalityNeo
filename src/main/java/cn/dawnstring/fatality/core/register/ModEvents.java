@@ -4,13 +4,16 @@ import cn.dawnstring.fatality.Fatality;
 import cn.dawnstring.fatality.core.ability.AbilitySystem;
 import cn.dawnstring.fatality.core.accessory.AccessoryManager;
 import cn.dawnstring.fatality.core.capability.PlayerAttributesProvider;
+import cn.dawnstring.fatality.core.input.PlayerInputState;
 import cn.dawnstring.fatality.core.network.SyncAttributesPacket;
+import cn.dawnstring.fatality.item.BaseWingItem;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.server.ServerStoppingEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
@@ -23,6 +26,7 @@ public class ModEvents
     {
         if (event.getEntity() instanceof ServerPlayer player)
         {
+            AccessoryManager.reload(player);
             AccessoryManager.refreshAttributes(player);
             PacketDistributor.sendToPlayer(player,
                     new SyncAttributesPacket(PlayerAttributesProvider.getAttributes(player)));
@@ -47,7 +51,7 @@ public class ModEvents
                     new SyncAttributesPacket(PlayerAttributesProvider.getAttributes(player)));
     }
 
-    //玩家退出时保存饰品数据
+    //玩家退出服务器时保存饰品数据
     @SubscribeEvent
     public static void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event)
     {
@@ -56,6 +60,25 @@ public class ModEvents
             AccessoryManager.save(player);
             AccessoryManager.remove(player.getUUID());
             PlayerAttributesProvider.remove(player.getUUID());
+            PlayerInputState.remove(player.getUUID());
+            BaseWingItem.remove(player.getUUID());
+        }
+    }
+
+    //服务器关闭时保存玩家饰品数据
+    @SubscribeEvent
+    public static void onServerStopping(ServerStoppingEvent event)
+    {
+        var players = event.getServer().getPlayerList().getPlayers();
+        Fatality.LOGGER.info("[ModEvents] ServerStoppingEvent 触发, 在线玩家数: {}", players.size());
+        for (ServerPlayer player : players)
+        {
+            Fatality.LOGGER.info("[ModEvents] 正在保存玩家 {} 的饰品", player.getName().getString());
+            AccessoryManager.save(player);
+            AccessoryManager.remove(player.getUUID());
+            PlayerAttributesProvider.remove(player.getUUID());
+            PlayerInputState.remove(player.getUUID());
+            BaseWingItem.remove(player.getUUID());
         }
     }
 
