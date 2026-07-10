@@ -2,10 +2,12 @@ package cn.dawnstring.fatality.client.input;
 
 import cn.dawnstring.fatality.Fatality;
 import cn.dawnstring.fatality.network.PlayerInputPayload;
+import cn.dawnstring.fatality.utils.PlayerEffectUtil;
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
@@ -15,6 +17,12 @@ import net.neoforged.neoforge.network.PacketDistributor;
 @EventBusSubscriber(modid = Fatality.MODID, value = Dist.CLIENT)
 public class ClientInputHandler
 {
+    @SubscribeEvent
+    public static void onClientDisconnect(ClientPlayerNetworkEvent.LoggingOut event)
+    {
+        PlayerEffectUtil.clear();
+    }
+
     @SubscribeEvent
     public static void onClientTick(ClientTickEvent.Post event)
     {

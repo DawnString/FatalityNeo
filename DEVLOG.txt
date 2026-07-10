@@ -111,3 +111,12 @@
 -BaseShieldItem
 -ShieldStats
 -KeyUtil
+
+2026/7/10 21/50 添加了玩家外表光效
+-NoiseTextureGenerator
+-ClientInputHandler
+-PlayerEffectLayer
+-ClientModEvent
+-SyncEffectPayload
+-PlayerEffectUtil
+-Fatality
