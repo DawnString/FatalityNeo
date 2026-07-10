@@ -47,7 +47,8 @@ public class BaseWingItem extends AccessoryItem
     {
         //去重：同一 tick 多个翅膀只处理一次
         Integer lastTick = PROCESSED_TICK.get(player.getUUID());
-        if (lastTick != null && lastTick == player.tickCount) return;
+        if (lastTick != null && lastTick == player.tickCount)
+            return;
         PROCESSED_TICK.put(player.getUUID(), player.tickCount);
 
         //创造/旁观模式跳过
@@ -149,7 +150,8 @@ public class BaseWingItem extends AccessoryItem
     {
         //先从缓存读
         Integer cached = FLIGHT_TIME.get(player.getUUID());
-        if (cached != null) return Math.min(cached, wingStats.maxFlightTime());
+        if (cached != null)
+            return Math.min(cached, wingStats.maxFlightTime());
 
         //缓存未命中，从持久化数据加载
         var data = player.getPersistentData();

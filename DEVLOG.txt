@@ -105,3 +105,9 @@
 而不是使用load()进行加载
 -AccessoryManager
 -ModEvents
+
+2026/7/10 15/27 添加了冲刺饰品基类
+-ModEvents
+-BaseShieldItem
+-ShieldStats
+-KeyUtil

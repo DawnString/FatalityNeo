@@ -21,6 +21,13 @@ public class KeyUtil
 
     public static final String KEY_JUMP = "jump";
     public static final String KEY_SNEAK = "sneak";
+    public static final String KEY_W = "key_w";
+    public static final String KEY_S = "key_s";
+    public static final String KEY_A = "key_a";
+    public static final String KEY_D = "key_d";
+
+    private static final Map<UUID, Float> PREV_FORWARD = new ConcurrentHashMap<>();
+    private static final Map<UUID, Float> PREV_LEFT = new ConcurrentHashMap<>();
 
     /**
      * 检测玩家是否按住跳跃键
@@ -85,6 +92,66 @@ public class KeyUtil
     }
 
     /**
+     * 双击W检测
+     * @param player 玩家
+     * @return 是否双双击W键
+     */
+    public static boolean consumeDoubleTapW(Player player)
+    {
+        UUID uuid = player.getUUID();
+        float cur = PlayerInputState.getForwardImpulse(player);
+        float prev = PREV_FORWARD.getOrDefault(uuid, 0f);
+        PREV_FORWARD.put(uuid, cur);
+
+        return cur > 0 && prev <= 0 && consumeDoubleTap(player, KEY_W);
+    }
+
+    /**
+     * 双击S检测
+     * @param player 玩家
+     * @return 是否双击S键
+     */
+    public static boolean consumeDoubleTapS(Player player)
+    {
+        UUID uuid = player.getUUID();
+        float cur = PlayerInputState.getForwardImpulse(player);
+        float prev = PREV_FORWARD.getOrDefault(uuid, 0f);
+        PREV_FORWARD.put(uuid, cur);
+
+        return cur < 0 && prev >= 0 && consumeDoubleTap(player, KEY_S);
+    }
+
+    /**
+     * 双击A检测
+     * @param player 玩家
+     * @return 是否双击A键
+     */
+    public static boolean consumeDoubleTapA(Player player)
+    {
+        UUID uuid = player.getUUID();
+        float cur = PlayerInputState.getLeftImpulse(player);
+        float prev = PREV_LEFT.getOrDefault(uuid, 0f);
+        PREV_LEFT.put(uuid, cur);
+
+        return cur > 0 && prev <= 0 && consumeDoubleTap(player, KEY_A);
+    }
+
+    /**
+     * 双击D键检测
+     * @param player 玩家
+     * @return 是否双击D键
+     */
+    public static boolean consumeDoubleTapD(Player player)
+    {
+        UUID uuid = player.getUUID();
+        float cur = PlayerInputState.getLeftImpulse(player);
+        float prev = PREV_LEFT.getOrDefault(uuid, 0f);
+        PREV_LEFT.put(uuid, cur);
+
+        return cur < 0 && prev >= 0 && consumeDoubleTap(player, KEY_D);
+    }
+
+    /**
      * 双击检测
      * 在按键按下的那一个 tick 调用（上升沿），重复调用会导致误触
      */
@@ -106,5 +173,7 @@ public class KeyUtil
     public static void reset(UUID uuid)
     {
         lastPressTick.remove(uuid);
+        PREV_FORWARD.remove(uuid);
+        PREV_LEFT.remove(uuid);
     }
 }

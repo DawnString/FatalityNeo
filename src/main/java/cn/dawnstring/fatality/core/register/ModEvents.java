@@ -6,7 +6,9 @@ import cn.dawnstring.fatality.core.accessory.AccessoryManager;
 import cn.dawnstring.fatality.core.capability.PlayerAttributesProvider;
 import cn.dawnstring.fatality.core.input.PlayerInputState;
 import cn.dawnstring.fatality.core.network.SyncAttributesPacket;
+import cn.dawnstring.fatality.item.BaseShieldItem;
 import cn.dawnstring.fatality.item.BaseWingItem;
+import cn.dawnstring.fatality.utils.KeyUtil;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -62,6 +64,8 @@ public class ModEvents
             PlayerAttributesProvider.remove(player.getUUID());
             PlayerInputState.remove(player.getUUID());
             BaseWingItem.remove(player.getUUID());
+            BaseShieldItem.remove(player.getUUID());
+            KeyUtil.reset(player.getUUID());
         }
     }
 
@@ -70,15 +74,15 @@ public class ModEvents
     public static void onServerStopping(ServerStoppingEvent event)
     {
         var players = event.getServer().getPlayerList().getPlayers();
-        Fatality.LOGGER.info("[ModEvents] ServerStoppingEvent 触发, 在线玩家数: {}", players.size());
         for (ServerPlayer player : players)
         {
-            Fatality.LOGGER.info("[ModEvents] 正在保存玩家 {} 的饰品", player.getName().getString());
             AccessoryManager.save(player);
             AccessoryManager.remove(player.getUUID());
             PlayerAttributesProvider.remove(player.getUUID());
             PlayerInputState.remove(player.getUUID());
             BaseWingItem.remove(player.getUUID());
+            BaseShieldItem.remove(player.getUUID());
+            KeyUtil.reset(player.getUUID());
         }
     }
 
