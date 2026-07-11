@@ -15,7 +15,7 @@ public class FuneralFlower extends AccessoryItem
         super(List.of(
                 new StatModifier("maxHealth", 60),
                 new StatModifier("damageReduction", 0.10f),
-                new StatModifier("recoverHealthSpeedBonus", 0.05f)
+                new StatModifier("recoverHealthSpeedBonus", 1)
         ));
     }
 }

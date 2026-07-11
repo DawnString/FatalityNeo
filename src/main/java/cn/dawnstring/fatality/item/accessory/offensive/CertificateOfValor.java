@@ -13,7 +13,7 @@ public class CertificateOfValor extends AccessoryItem
     {
         super(List.of(
                 new StatModifier("criticalHitRate", 0.06f),
-                new StatModifier("recoverHealthSpeedBonus", 0.05f)
+                new StatModifier("recoverHealthSpeedBonus", 1)
         ));
     }
 }

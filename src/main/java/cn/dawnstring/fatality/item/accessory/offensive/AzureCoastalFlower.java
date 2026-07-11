@@ -14,7 +14,7 @@ public class AzureCoastalFlower extends AccessoryItem
         super(List.of(
                 new StatModifier("magicDamageValueBonus", 20),
                 new StatModifier("magicCriticalDamageBonus", 0.25f),
-                new StatModifier("recoverManaSpeedBonus", 0.05f)
+                new StatModifier("recoverManaSpeedBonus", 1)
         ));
     }
 }

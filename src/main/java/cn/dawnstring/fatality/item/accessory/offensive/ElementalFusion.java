@@ -13,7 +13,7 @@ public class ElementalFusion extends AccessoryItem
     {
         super(List.of(
                 new StatModifier("magicDamagePercentBonus", 0.12f),
-                new StatModifier("recoverManaSpeedBonus", 0.10f)
+                new StatModifier("recoverManaSpeedBonus", 1)
         ));
     }
 }

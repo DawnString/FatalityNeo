@@ -14,7 +14,7 @@ public class ElementalBloom extends AccessoryItem
         super(List.of(
                 new StatModifier("magicDamageValueBonus", 30),
                 new StatModifier("magicCriticalDamageBonus", 0.55f),
-                new StatModifier("recoverManaSpeedBonus", 0.12f)
+                new StatModifier("recoverManaSpeedBonus", 1)
         ));
     }
 }

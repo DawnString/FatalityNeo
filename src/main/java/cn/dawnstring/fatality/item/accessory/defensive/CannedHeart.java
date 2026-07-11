@@ -13,7 +13,7 @@ public class CannedHeart extends AccessoryItem
     public CannedHeart()
     {
         super(List.of(
-                new StatModifier("recoverHealthSpeedBonus", 0.10f)
+                new StatModifier("recoverHealthSpeedBonus", 1)
         ));
     }
 }

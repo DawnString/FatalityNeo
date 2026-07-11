@@ -1,7 +1,14 @@
 package cn.dawnstring.fatality.item.accessory;
 
+import cn.dawnstring.fatality.core.ability.Ability;
 import cn.dawnstring.fatality.core.input.PlayerInputState;
+import cn.dawnstring.fatality.utils.TooltipHelper;
+import net.minecraft.network.chat.Component;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
@@ -9,7 +16,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class BaseWingItem extends AccessoryItem
+public class BaseWingItem extends AccessoryItem implements Ability
 {
     private static final Map<UUID, Integer> FLIGHT_TIME = new ConcurrentHashMap<>();
     private static final Map<UUID, Integer> PROCESSED_TICK = new ConcurrentHashMap<>();
@@ -29,9 +36,36 @@ public class BaseWingItem extends AccessoryItem
         return wingStats;
     }
 
+    @Override
+    public float onHurt(Player player, DamageSource source, float amount)
+    {
+        if (source.is(DamageTypeTags.IS_FALL))
+        {
+            player.fallDistance = 0;
+            return 0;
+        }
+        return amount;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("§7").append(Component.translatable("wing.fatality.maxHorizontalSpeed").getString()).append(": §e").append(String.format("%.1f", wingStats.maxHorizontalSpeed() * 20)).append(" m/s\n");
+        sb.append("§7").append(Component.translatable("wing.fatality.horizontalAcceleration").getString()).append(": §e").append(String.format("%.1f", wingStats.horizontalAcceleration() * 20)).append(" m/s²\n");
+        sb.append("§7").append(Component.translatable("wing.fatality.maxVerticalSpeed").getString()).append(": §e").append(String.format("%.1f", wingStats.maxVerticalSpeed() * 20)).append(" m/s\n");
+        sb.append("§7").append(Component.translatable("wing.fatality.upwardAcceleration").getString()).append(": §e").append(String.format("%.1f", wingStats.upwardAcceleration() * 20)).append(" m/s²\n");
+        sb.append("§7").append(Component.translatable("wing.fatality.glideSpeed").getString()).append(": §e").append(String.format("%.1f", wingStats.glideSpeed() * 20)).append(" m/s\n");
+        sb.append("§7").append(Component.translatable("wing.fatality.maxFlightTime").getString()).append(": §e").append(String.format("%.1f", wingStats.maxFlightTime() / 20.0f)).append(" s\n");
+        if (wingStats.horizontalDrag() > 0)
+            sb.append("§7").append(Component.translatable("wing.fatality.horizontalDrag").getString()).append(": §e").append(String.format("%.2f", wingStats.horizontalDrag()));
+        TooltipHelper.addDescriptiveTooltip(stack, tooltip, flag, null, sb.toString(), false);
+    }
+
     public static int getRemainingFlightTime(Player player)
     {
-        return FLIGHT_TIME.get(player.getUUID());
+        Integer time = FLIGHT_TIME.get(player.getUUID());
+        return time != null ? time : 0;
     }
 
     @Override

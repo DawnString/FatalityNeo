@@ -13,7 +13,7 @@ public class MagesShadow extends AccessoryItem
     {
         super(List.of(
                 new StatModifier("magicDamagePercentBonus", 0.18f),
-                new StatModifier("recoverManaSpeedBonus", 0.15f)
+                new StatModifier("recoverManaSpeedBonus", 2)
         ));
     }
 }

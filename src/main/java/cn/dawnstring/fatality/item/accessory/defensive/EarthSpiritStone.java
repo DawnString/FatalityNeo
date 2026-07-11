@@ -13,7 +13,7 @@ public class EarthSpiritStone extends AccessoryItem
     public EarthSpiritStone()
     {
         super(List.of(
-                new StatModifier("recoverHealthSpeedBonus", 0.15f)
+                new StatModifier("recoverHealthSpeedBonus", 2)
         ));
     }
 }

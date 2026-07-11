@@ -15,7 +15,7 @@ public class MagesShield extends AccessoryItem
         super(List.of(
                 new StatModifier("armor", 6),
                 new StatModifier("mana", 60),
-                new StatModifier("recoverManaSpeedBonus", 0.15f)
+                new StatModifier("recoverManaSpeedBonus", 2)
         ));
     }
 }

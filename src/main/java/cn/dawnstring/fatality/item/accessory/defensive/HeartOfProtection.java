@@ -15,7 +15,7 @@ public class HeartOfProtection extends AccessoryItem
         super(List.of(
                 new StatModifier("armor", 10),
                 new StatModifier("maxHealth", 10),
-                new StatModifier("recoverHealthSpeedBonus", 0.08f),
+                new StatModifier("recoverHealthSpeedBonus", 1),
                 new StatModifier("criticalHitRate", 0.10f),
                 new StatModifier("baseDamagePercentBonus", 0.05f)
         ));

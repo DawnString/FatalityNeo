@@ -21,9 +21,9 @@ public class PlayerAttributes implements IPlayerAttributes
     private float attackSpeed = 0;
     private int mana = 100;
     private int currentMana = mana;
-    private float moveSpeedBonus = 0;
-    private float recoverHealthSpeedBonus  = 0;
-    private float recoverManaSpeedBonus = 0;
+    private float  moveSpeedBonus= 0;
+    private int recoverHealthSpeedBonus = 0;
+    private int recoverManaSpeedBonus = 0;
     private int armor = 0;
     private float damageReduction = 0;
     private float penetrationResistance = 0;
@@ -291,32 +291,32 @@ public class PlayerAttributes implements IPlayerAttributes
         moveSpeedBonus += value;
     }
     @Override
-    public float getRecoverHealthSpeedBonus()
+    public int getRecoverHealthSpeedBonus()
     {
         return recoverHealthSpeedBonus;
     }
     @Override
-    public void setRecoverHealthSpeedBonus(float value)
+    public void setRecoverHealthSpeedBonus(int value)
     {
         recoverHealthSpeedBonus = value;
     }
     @Override
-    public void addRecoverHealthSpeedBonus(float value)
+    public void addRecoverHealthSpeedBonus(int value)
     {
         recoverHealthSpeedBonus += value;
     }
     @Override
-    public float getRecoverManaSpeedBonus()
+    public int getRecoverManaSpeedBonus()
     {
         return recoverManaSpeedBonus;
     }
     @Override
-    public void setRecoverManaSpeedBonus(float value)
+    public void setRecoverManaSpeedBonus(int value)
     {
         recoverManaSpeedBonus = value;
     }
     @Override
-    public void addRecoverManaSpeedBonus(float value)
+    public void addRecoverManaSpeedBonus(int value)
     {
         recoverManaSpeedBonus += value;
     }
@@ -449,8 +449,8 @@ public class PlayerAttributes implements IPlayerAttributes
         tag.putFloat("attackSpeed", attackSpeed);
         tag.putInt("mana", mana);
         tag.putFloat("moveSpeedBonus", moveSpeedBonus);
-        tag.putFloat("recoverHealthSpeedBonus", recoverHealthSpeedBonus);
-        tag.putFloat("recoverManaSpeedBonus", recoverManaSpeedBonus);
+        tag.putInt("recoverHealthSpeedBonus", recoverHealthSpeedBonus);
+        tag.putInt("recoverManaSpeedBonus", recoverManaSpeedBonus);
         tag.putInt("armor", armor);
         tag.putFloat("damageReduction", damageReduction);
         tag.putFloat("penetrationResistance", penetrationResistance);
@@ -479,8 +479,8 @@ public class PlayerAttributes implements IPlayerAttributes
         this.attackSpeed = compoundTag.getFloat("attackSpeed");
         this.mana = compoundTag.getInt("mana");
         this.moveSpeedBonus = compoundTag.getFloat("moveSpeedBonus");
-        this.recoverHealthSpeedBonus = compoundTag.getFloat("recoverHealthSpeedBonus");
-        this.recoverManaSpeedBonus = compoundTag.getFloat("recoverManaSpeedBonus");
+        this.recoverHealthSpeedBonus = compoundTag.getInt("recoverHealthSpeedBonus");
+        this.recoverManaSpeedBonus = compoundTag.getInt("recoverManaSpeedBonus");
         this.armor = compoundTag.getInt("armor");
         this.damageReduction = compoundTag.getFloat("damageReduction");
         this.penetrationResistance = compoundTag.getFloat("penetrationResistance");

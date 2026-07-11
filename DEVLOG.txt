@@ -177,3 +177,14 @@ accessory/defensive
 -ItemCategory
 -Fatality
 -ModEvents
+
+2026/7/11 17/44添加了机动型饰品
+-accessory/mobile
+同时修改了recoverHealthSpeedBonus与recoverManaSpeedBonus
+改为数值加成而非是百分比
+-IPlayerAttributes
+-PlayerAttributes
+-AccessoryManager
+-RegenSystem
+以及一些运用了这些加成的饰品等
+并且添加i18n

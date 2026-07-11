@@ -15,7 +15,7 @@ public class CursedFlameFlower extends AccessoryItem
                 new StatModifier("magicDamageValueBonus", 28),
                 new StatModifier("magicCriticalDamageBonus", 0.20f),
                 new StatModifier("mana", 30),
-                new StatModifier("recoverManaSpeedBonus", 0.05f)
+                new StatModifier("recoverManaSpeedBonus", 1)
         ));
     }
 }

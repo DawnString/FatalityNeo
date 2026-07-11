@@ -13,7 +13,7 @@ public class NightmareMedal extends AccessoryItem
     {
         super(List.of(
                 new StatModifier("magicCriticalDamageBonus", 0.45f),
-                new StatModifier("recoverManaSpeedBonus", 0.12f),
+                new StatModifier("recoverManaSpeedBonus", 1),
                 new StatModifier("criticalHitRate", 0.15f)
         ));
     }

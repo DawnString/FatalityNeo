@@ -14,7 +14,7 @@ public class FireBlossom extends AccessoryItem
         super(List.of(
                 new StatModifier("magicDamageValueBonus", 25),
                 new StatModifier("magicCriticalDamageBonus", 0.35f),
-                new StatModifier("recoverManaSpeedBonus", 0.08f)
+                new StatModifier("recoverManaSpeedBonus", 1)
         ));
     }
 }

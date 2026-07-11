@@ -14,7 +14,7 @@ public class WitheringBloom extends AccessoryItem
         super(List.of(
                 new StatModifier("magicDamageValueBonus", 20),
                 new StatModifier("magicCriticalDamageBonus", 0.40f),
-                new StatModifier("recoverManaSpeedBonus", 0.10f)
+                new StatModifier("recoverManaSpeedBonus", 1)
         ));
     }
 }

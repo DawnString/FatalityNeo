@@ -14,7 +14,7 @@ public class UltimateYinStone extends AccessoryItem
     {
         super(List.of(
                 new StatModifier("armor", 30),
-                new StatModifier("recoverHealthSpeedBonus", 0.10f)
+                new StatModifier("recoverHealthSpeedBonus", 1)
         ));
     }
 }

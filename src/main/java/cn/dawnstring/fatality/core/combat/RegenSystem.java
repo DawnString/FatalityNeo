@@ -50,8 +50,7 @@ public class RegenSystem
             data.healthTickTimer++;
             if (data.healthTickTimer >= REGEN_INTERVAL)
             {
-                float amount = 1.0f + attrs.getRecoverHealthSpeedBonus();
-                player.heal(amount);
+                player.heal(1 + attrs.getRecoverHealthSpeedBonus());
                 data.healthTickTimer = 0;
             }
         }

@@ -13,7 +13,7 @@ public class BookOfSacredFlame extends AccessoryItem
     {
         super(List.of(
                 new StatModifier("magicDamagePercentBonus", 0.06f),
-                new StatModifier("recoverManaSpeedBonus", 0.08f)
+                new StatModifier("recoverManaSpeedBonus", 1)
         ));
     }
 }

@@ -44,7 +44,7 @@ public class HeartOfOrigin extends AccessoryItem implements Ability
         super(List.of(
                 new StatModifier("maxHealth", 100),
                 new StatModifier("damageReduction", 0.15f),
-                new StatModifier("recoverHealthSpeedBonus", 0.10f)
+                new StatModifier("recoverHealthSpeedBonus", 1)
         ));
     }
 

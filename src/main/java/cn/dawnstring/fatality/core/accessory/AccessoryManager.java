@@ -124,8 +124,8 @@ public class AccessoryManager
             case "attackSpeed" -> playerAttributes.addAttackSpeed(modifier.value());
             case "mana" -> playerAttributes.addMaxMana((int) modifier.value());
             case "moveSpeedBonus" -> playerAttributes.addMoveSpeedBonus(modifier.value());
-            case "recoverHealthSpeedBonus" -> playerAttributes.addRecoverHealthSpeedBonus(modifier.value());
-            case "recoverManaSpeedBonus" -> playerAttributes.addRecoverManaSpeedBonus(modifier.value());
+            case "recoverHealthSpeedBonus" -> playerAttributes.addRecoverHealthSpeedBonus((int) modifier.value());
+            case "recoverManaSpeedBonus" -> playerAttributes.addRecoverManaSpeedBonus((int) modifier.value());
             case "armor" -> playerAttributes.addArmor((int) modifier.value());
             case "damageReduction" -> playerAttributes.addDamageReduction(modifier.value());
             case "penetrationResistance" -> playerAttributes.addPenetrationResistance(modifier.value());

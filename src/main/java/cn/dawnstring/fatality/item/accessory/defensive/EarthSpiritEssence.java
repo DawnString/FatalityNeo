@@ -13,7 +13,7 @@ public class EarthSpiritEssence extends AccessoryItem
     public EarthSpiritEssence()
     {
         super(List.of(
-                new StatModifier("recoverHealthSpeedBonus", 0.05f)
+                new StatModifier("recoverHealthSpeedBonus", 1)
         ));
     }
 }

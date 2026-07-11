@@ -81,14 +81,14 @@ public interface IPlayerAttributes extends INBTSerializable<CompoundTag>
     void addMoveSpeedBonus(float value);
 
     //回血速度加成
-    float getRecoverHealthSpeedBonus();
-    void setRecoverHealthSpeedBonus(float value);
-    void addRecoverHealthSpeedBonus(float value);
+    int getRecoverHealthSpeedBonus();
+    void setRecoverHealthSpeedBonus(int value);
+    void addRecoverHealthSpeedBonus(int value);
 
     //回法速度加成
-    float getRecoverManaSpeedBonus();
-    void setRecoverManaSpeedBonus(float value);
-    void addRecoverManaSpeedBonus(float value);
+    int getRecoverManaSpeedBonus();
+    void setRecoverManaSpeedBonus(int value);
+    void addRecoverManaSpeedBonus(int value);
 
     //护甲值
     int getArmor();

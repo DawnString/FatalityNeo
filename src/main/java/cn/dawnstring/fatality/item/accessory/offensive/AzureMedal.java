@@ -13,7 +13,7 @@ public class AzureMedal extends AccessoryItem
     {
         super(List.of(
                 new StatModifier("magicCriticalDamageBonus", 0.30f),
-                new StatModifier("recoverManaSpeedBonus", 0.08f)
+                new StatModifier("recoverManaSpeedBonus", 1)
         ));
     }
 }
