@@ -1,4 +1,4 @@
-package cn.dawnstring.fatality.item;
+package cn.dawnstring.fatality.item.weapon;
 
 import cn.dawnstring.fatality.utils.TooltipHelper;
 import net.minecraft.network.chat.Component;

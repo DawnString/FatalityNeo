@@ -2,8 +2,8 @@ package cn.dawnstring.fatality.core.combat;
 
 import cn.dawnstring.fatality.core.capability.PlayerAttributes;
 import cn.dawnstring.fatality.core.capability.PlayerAttributesProvider;
-import cn.dawnstring.fatality.item.WeaponItem;
-import cn.dawnstring.fatality.item.WeaponStats;
+import cn.dawnstring.fatality.item.weapon.WeaponItem;
+import cn.dawnstring.fatality.item.weapon.WeaponStats;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;

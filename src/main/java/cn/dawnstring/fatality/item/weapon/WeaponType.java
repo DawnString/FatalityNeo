@@ -1,4 +1,4 @@
-package cn.dawnstring.fatality.item;
+package cn.dawnstring.fatality.item.weapon;
 
 public enum WeaponType
 {

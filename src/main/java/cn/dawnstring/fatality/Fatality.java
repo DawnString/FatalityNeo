@@ -7,6 +7,7 @@ import cn.dawnstring.fatality.core.register.ClientModEvents;
 import cn.dawnstring.fatality.network.PlayerInputPayload;
 import cn.dawnstring.fatality.network.SyncEffectPayload;
 import cn.dawnstring.fatality.network.TotemAnimationPayload;
+import cn.dawnstring.fatality.item.armor.ModArmorMaterials;
 import cn.dawnstring.fatality.register.AutoItemRegistry;
 import cn.dawnstring.fatality.register.ModCreativeTabs;
 import cn.dawnstring.fatality.utils.PlayerEffectUtil;
@@ -40,6 +41,7 @@ public class Fatality
 
     public Fatality(IEventBus modEventBus, ModContainer modContainer)
     {
+        ModArmorMaterials.register(modEventBus);
         AutoItemRegistry.registerItems(modEventBus);
         ModCreativeTabs.register(modEventBus);
 

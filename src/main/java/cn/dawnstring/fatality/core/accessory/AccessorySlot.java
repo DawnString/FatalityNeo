@@ -1,9 +1,7 @@
 package cn.dawnstring.fatality.core.accessory;
 
-import cn.dawnstring.fatality.Fatality;
-import cn.dawnstring.fatality.item.AccessoryItem;
+import cn.dawnstring.fatality.item.accessory.AccessoryItem;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;

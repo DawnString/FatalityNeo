@@ -2,9 +2,9 @@ package cn.dawnstring.fatality.item.accessory.defensive;
 
 import cn.dawnstring.fatality.core.ability.Ability;
 import cn.dawnstring.fatality.core.combat.RegenSystem;
-import cn.dawnstring.fatality.item.AccessoryItem;
+import cn.dawnstring.fatality.item.accessory.AccessoryItem;
 import cn.dawnstring.fatality.item.ItemCategory;
-import cn.dawnstring.fatality.item.StatModifier;
+import cn.dawnstring.fatality.item.accessory.StatModifier;
 import cn.dawnstring.fatality.register.AutoItem;
 import cn.dawnstring.fatality.utils.PlayerEffectUtil;
 import net.minecraft.world.damagesource.DamageSource;

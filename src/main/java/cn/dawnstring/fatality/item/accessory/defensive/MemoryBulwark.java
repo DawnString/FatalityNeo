@@ -1,7 +1,7 @@
 package cn.dawnstring.fatality.item.accessory.defensive;
 
 import cn.dawnstring.fatality.core.ability.Ability;
-import cn.dawnstring.fatality.item.AccessoryItem;
+import cn.dawnstring.fatality.item.accessory.AccessoryItem;
 import cn.dawnstring.fatality.item.ItemCategory;
 import cn.dawnstring.fatality.register.AutoItem;
 import net.minecraft.world.damagesource.DamageSource;

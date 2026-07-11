@@ -1,6 +1,6 @@
 package cn.dawnstring.fatality.item.accessory.defensive;
 
-import cn.dawnstring.fatality.item.AccessoryItem;
+import cn.dawnstring.fatality.item.accessory.AccessoryItem;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 

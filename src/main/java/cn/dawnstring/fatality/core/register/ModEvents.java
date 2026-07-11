@@ -4,11 +4,12 @@ import cn.dawnstring.fatality.Fatality;
 import cn.dawnstring.fatality.core.ability.AbilitySystem;
 import cn.dawnstring.fatality.core.accessory.AccessoryManager;
 import cn.dawnstring.fatality.core.capability.PlayerAttributesProvider;
+import cn.dawnstring.fatality.core.combat.ArmorStatManager;
 import cn.dawnstring.fatality.core.combat.RegenSystem;
 import cn.dawnstring.fatality.core.input.PlayerInputState;
 import cn.dawnstring.fatality.core.network.SyncAttributesPacket;
-import cn.dawnstring.fatality.item.BaseShieldItem;
-import cn.dawnstring.fatality.item.BaseWingItem;
+import cn.dawnstring.fatality.item.accessory.BaseShieldItem;
+import cn.dawnstring.fatality.item.accessory.BaseWingItem;
 import cn.dawnstring.fatality.utils.KeyUtil;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -107,6 +108,7 @@ public class ModEvents
     public static void onPlayerTick(PlayerTickEvent.Pre event)
     {
         RegenSystem.tick(event.getEntity());
+        ArmorStatManager.tick(event.getEntity());
         AccessoryManager.tick(event.getEntity());
     }
 

@@ -1,4 +1,4 @@
-package cn.dawnstring.fatality.item;
+package cn.dawnstring.fatality.item.accessory;
 
 import cn.dawnstring.fatality.utils.KeyUtil;
 import net.minecraft.core.BlockPos;

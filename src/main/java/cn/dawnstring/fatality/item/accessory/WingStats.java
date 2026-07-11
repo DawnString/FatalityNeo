@@ -1,4 +1,4 @@
-package cn.dawnstring.fatality.item;
+package cn.dawnstring.fatality.item.accessory;
 
 /**
  * 翅膀飞行数据

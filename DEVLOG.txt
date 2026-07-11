@@ -168,3 +168,12 @@ accessory/defensive
 7.修复 RegenSystem 法力自然恢复不同步到客户端
   -manaCooldown<=0 恢复法力时发包同步
 8.移除 Fatality.onFirstWood 中 ServerPlayer 后的冗余代码
+
+2026/7/11 13/00 添加护甲机制
+-ArmorStatManager
+-ArmorStats
+-BaseArmorItem
+-ModArmorMaterials
+-ItemCategory
+-Fatality
+-ModEvents

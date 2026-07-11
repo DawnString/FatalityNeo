@@ -7,5 +7,7 @@ public enum ItemCategory
     //饰品
     ACCESSORY,
     //武器
-    WEAPON
+    WEAPON,
+    //护甲
+    ARMOR
 }
