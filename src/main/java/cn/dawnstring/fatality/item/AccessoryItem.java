@@ -37,6 +37,9 @@ public class AccessoryItem extends Item
         return false;
     }
 
+    //从饰品栏移除时触发
+    public void onUnequipped(Player player) {}
+
     public void setUniqueDes(Component uniqueDes)
     {
         this.uniqueDes = uniqueDes;

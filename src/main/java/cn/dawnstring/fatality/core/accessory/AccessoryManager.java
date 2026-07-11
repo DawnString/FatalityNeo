@@ -20,7 +20,9 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -137,9 +139,32 @@ public class AccessoryManager
         }
     }
 
+    private static final Map<UUID, List<ItemStack>> prevEquipment = new ConcurrentHashMap<>();
+
     public static void tick(Player player)
     {
         SimpleContainer inv = getInventory(player);
+
+        // 检测装备变更
+        List<ItemStack> prev = prevEquipment.get(player.getUUID());
+        List<ItemStack> curr = new ArrayList<>();
+        for (int i = 0; i < SLOT_COUNT; i++)
+            curr.add(inv.getItem(i).copy());
+
+        if (prev != null)
+        {
+            for (int i = 0; i < SLOT_COUNT; i++)
+            {
+                if (i < prev.size() && !prev.get(i).isEmpty()
+                        && (i >= curr.size() || curr.get(i).isEmpty()))
+                {
+                    if (prev.get(i).getItem() instanceof AccessoryItem acc)
+                        acc.onUnequipped(player);
+                }
+            }
+        }
+        prevEquipment.put(player.getUUID(), curr);
+
         for (int i = 0; i < SLOT_COUNT; i++)
         {
             ItemStack stack = inv.getItem(i);
@@ -209,6 +234,7 @@ public class AccessoryManager
     {
         serverMap.remove(uuid);
         clientMap.remove(uuid);
+        prevEquipment.remove(uuid);
     }
 
     /**

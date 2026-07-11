@@ -4,17 +4,21 @@ import cn.dawnstring.fatality.Fatality;
 import cn.dawnstring.fatality.core.ability.AbilitySystem;
 import cn.dawnstring.fatality.core.accessory.AccessoryManager;
 import cn.dawnstring.fatality.core.capability.PlayerAttributesProvider;
+import cn.dawnstring.fatality.core.combat.RegenSystem;
 import cn.dawnstring.fatality.core.input.PlayerInputState;
 import cn.dawnstring.fatality.core.network.SyncAttributesPacket;
 import cn.dawnstring.fatality.item.BaseShieldItem;
 import cn.dawnstring.fatality.item.BaseWingItem;
 import cn.dawnstring.fatality.utils.KeyUtil;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.GameRules;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.event.server.ServerStoppingEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -62,6 +66,7 @@ public class ModEvents
             AccessoryManager.save(player);
             AccessoryManager.remove(player.getUUID());
             PlayerAttributesProvider.remove(player.getUUID());
+            RegenSystem.remove(player.getUUID());
             PlayerInputState.remove(player.getUUID());
             BaseWingItem.remove(player.getUUID());
             BaseShieldItem.remove(player.getUUID());
@@ -79,6 +84,7 @@ public class ModEvents
             AccessoryManager.save(player);
             AccessoryManager.remove(player.getUUID());
             PlayerAttributesProvider.remove(player.getUUID());
+            RegenSystem.remove(player.getUUID());
             PlayerInputState.remove(player.getUUID());
             BaseWingItem.remove(player.getUUID());
             BaseShieldItem.remove(player.getUUID());
@@ -86,11 +92,21 @@ public class ModEvents
         }
     }
 
+    //服务器启动时禁用原版自然恢复
+    @SubscribeEvent
+    public static void onServerStarted(ServerStartedEvent event)
+    {
+        for (ServerLevel level : event.getServer().getAllLevels())
+        {
+            level.getGameRules().getRule(GameRules.RULE_NATURAL_REGENERATION).set(false, event.getServer());
+        }
+    }
+
     //玩家tick
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Pre event)
     {
-        PlayerAttributesProvider.getAttributes(event.getEntity()).tick();
+        RegenSystem.tick(event.getEntity());
         AccessoryManager.tick(event.getEntity());
     }
 
@@ -99,6 +115,8 @@ public class ModEvents
     {
         if (event.getEntity() instanceof ServerPlayer player)
         {
+            RegenSystem.onHurt(player);
+
             if (AccessoryManager.onAttacked(player, event.getSource(), event.getAmount()))
             {
                 event.setCanceled(true);

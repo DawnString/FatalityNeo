@@ -120,3 +120,13 @@
 -SyncEffectPayload
 -PlayerEffectUtil
 -Fatality
+
+2026/7/11 8/50 实现了魔法与生命值系统
+-RegenSystem
+-ModEvents
+-PlayerAttributes
+为饰品系统添加了摘下饰品的检查
+-AccessoryManager
+-AccessoryItem
+实现防御型饰品
+accessory/defensive

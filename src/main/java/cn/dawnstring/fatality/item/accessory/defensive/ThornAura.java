@@ -1,18 +1,19 @@
-package cn.dawnstring.fatality.item.accessory.offensive;
+package cn.dawnstring.fatality.item.accessory.defensive;
 
 import cn.dawnstring.fatality.item.AccessoryItem;
 import cn.dawnstring.fatality.item.ItemCategory;
 import cn.dawnstring.fatality.item.StatModifier;
 import cn.dawnstring.fatality.register.AutoItem;
+
 import java.util.List;
 
-@AutoItem(itemId = "life_necklace", category = ItemCategory.ACCESSORY)
-public class LifeNecklace extends AccessoryItem
+@AutoItem(itemId = "thorn_aura", category = ItemCategory.ACCESSORY)
+public class ThornAura extends AccessoryItem
 {
-    public LifeNecklace()
+    public ThornAura()
     {
         super(List.of(
-                new StatModifier("maxHealth", 10)
+                new StatModifier("armor", 2)
         ));
     }
 }

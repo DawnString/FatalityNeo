@@ -428,14 +428,6 @@ public class PlayerAttributes implements IPlayerAttributes
     @Override
     public void tick()
     {
-        if (regenCooldown-- <= 0)
-        {
-            if (currentMana < mana)
-            {
-                currentMana = Math.min(mana, currentMana + 10);
-            }
-            regenCooldown = 20;
-        }
     }
 
     @Override
