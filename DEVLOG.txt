@@ -130,3 +130,9 @@
 -AccessoryItem
 实现防御型饰品
 accessory/defensive
+
+2026/7/11 替换原版的状态条
+-FatalityHudOverlay
+-HudOverlayRegistry
+-BaseWingItem
+-Fatality

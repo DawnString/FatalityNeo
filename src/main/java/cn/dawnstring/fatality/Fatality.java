@@ -1,5 +1,6 @@
 package cn.dawnstring.fatality;
 
+import cn.dawnstring.fatality.client.gui.hud.HudOverlayRegistry;
 import cn.dawnstring.fatality.guide.loader.GuideLoader;
 import cn.dawnstring.fatality.core.input.PlayerInputState;
 import cn.dawnstring.fatality.core.register.ClientModEvents;
@@ -18,6 +19,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
@@ -41,11 +43,15 @@ public class Fatality
         AutoItemRegistry.registerItems(modEventBus);
         ModCreativeTabs.register(modEventBus);
 
+        modEventBus.addListener(RegisterGuiLayersEvent.class, HudOverlayRegistry::onRegisterLayers);
+
+
         modEventBus.addListener(EntityRenderersEvent.AddLayers.class, ClientModEvents::onAddLayers);
         modEventBus.addListener(RegisterPayloadHandlersEvent.class, event ->
         {
             var registrar = event.registrar(Fatality.MODID);
 
+            //终末之言的动画
             registrar.playToClient(TotemAnimationPayload.TYPE, TotemAnimationPayload.STREAM_CODEC,
                     (payload, context) ->
                     {
@@ -57,6 +63,7 @@ public class Fatality
                             mc.player.playSound(net.minecraft.sounds.SoundEvents.TOTEM_USE, 1.0f, 1.0f);
                     });
 
+            //玩家输入检测
             registrar.playToServer(
                     PlayerInputPayload.TYPE,
                     PlayerInputPayload.STREAM_CODEC,
@@ -68,6 +75,7 @@ public class Fatality
                                 payload.forwardImpulse(), payload.leftImpulse());
                     });
 
+            //玩家光效同步
             registrar.playToClient(
                     SyncEffectPayload.TYPE,
                     SyncEffectPayload.STREAM_CODEC,
@@ -82,6 +90,8 @@ public class Fatality
                 event.addListener(new GuideLoader()));
 
         NeoForge.EVENT_BUS.addListener(Fatality::onFirstWood);
+
+        NeoForge.EVENT_BUS.addListener(HudOverlayRegistry::onRenderGuiLayerPre);
 
         LOGGER.info("Fatality initialized");
     }

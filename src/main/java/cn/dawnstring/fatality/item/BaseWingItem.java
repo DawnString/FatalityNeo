@@ -29,6 +29,11 @@ public class BaseWingItem extends AccessoryItem
         return wingStats;
     }
 
+    public static int getRemainingFlightTime(Player player)
+    {
+        return FLIGHT_TIME.get(player.getUUID());
+    }
+
     @Override
     public void tick(Player player)
     {
