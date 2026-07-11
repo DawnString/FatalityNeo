@@ -55,6 +55,10 @@ public class ShadowArmor extends AccessoryItem implements Ability
             return;
         lastTick.put(player.getUUID(), player.tickCount);
 
+        // 魔力操作只在服务端进行
+        if (player.level().isClientSide())
+            return;
+
         ShieldData data = shieldMap.get(player.getUUID());
         if (data == null)
         {

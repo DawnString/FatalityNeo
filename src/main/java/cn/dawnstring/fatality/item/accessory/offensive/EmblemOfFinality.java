@@ -10,11 +10,14 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 @AutoItem(itemId = "emblem_of_finality", category = ItemCategory.ACCESSORY)
 public class EmblemOfFinality extends AccessoryItem implements Ability
 {
-    private int hitCount = 0;
+    private static final Map<UUID, Integer> hitCountMap = new ConcurrentHashMap<>();
 
     public EmblemOfFinality()
     {
@@ -29,12 +32,20 @@ public class EmblemOfFinality extends AccessoryItem implements Ability
     @Override
     public float modifyOutgoingDamage(Player player, LivingEntity target, float amount)
     {
-        if (hitCount == 5)
+        UUID uuid = player.getUUID();
+        int hitCount = hitCountMap.getOrDefault(uuid, 0);
+        if (hitCount == 4)
         {
-            hitCount = 0;
+            hitCountMap.put(uuid, 0);
             return amount * 2;
         }
-        hitCount++;
+        hitCountMap.put(uuid, hitCount + 1);
         return amount;
+    }
+
+    @Override
+    public void onUnequipped(Player player)
+    {
+        hitCountMap.remove(player.getUUID());
     }
 }

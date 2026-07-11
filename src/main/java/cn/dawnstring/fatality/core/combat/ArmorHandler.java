@@ -5,6 +5,7 @@ import cn.dawnstring.fatality.core.capability.PlayerAttributesProvider;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 
@@ -24,8 +25,8 @@ public class ArmorHandler
     public static float apply(float rawDamage, Player target, DamageSource source)
     {
         PlayerAttributes attributes = PlayerAttributesProvider.getAttributes(target);
-        float armor = attributes.getArmor();
-        float toughness = attributes.getArmorToughness();
+        float armor = target.getArmorValue();
+        float toughness = (float) target.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
         // 穿透抗性
         float penResist = attributes.getPenetrationResistance();
         // 抗穿透系数

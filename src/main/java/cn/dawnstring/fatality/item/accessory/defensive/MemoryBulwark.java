@@ -53,4 +53,10 @@ public class MemoryBulwark extends AccessoryItem implements Ability
             damageMap.remove(player.getUUID());
         }
     }
+
+    @Override
+    public void onUnequipped(Player player)
+    {
+        damageMap.remove(player.getUUID());
+    }
 }

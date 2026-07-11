@@ -2,7 +2,10 @@ package cn.dawnstring.fatality.core.combat;
 
 import cn.dawnstring.fatality.core.capability.PlayerAttributes;
 import cn.dawnstring.fatality.core.capability.PlayerAttributesProvider;
+import cn.dawnstring.fatality.core.network.SyncAttributesPacket;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.Map;
 import java.util.UUID;
@@ -58,6 +61,12 @@ public class RegenSystem
         {
             int regen = BASE_MANA_REGEN + (int) attrs.getRecoverManaSpeedBonus();
             attrs.addCurrentMana(regen);
+
+            if (player instanceof ServerPlayer sp)
+            {
+                PacketDistributor.sendToPlayer(sp,
+                        new SyncAttributesPacket(PlayerAttributesProvider.getAttributes(player)));
+            }
         }
     }
 
@@ -87,6 +96,14 @@ public class RegenSystem
         RegenData data = dataMap.computeIfAbsent(player.getUUID(),
                 id -> new RegenData(0, 0, 0));
         data.manaCooldown = PAUSE_TICKS;
+
+        // 同步魔力到客户端
+        if (player instanceof ServerPlayer sp)
+        {
+            PacketDistributor.sendToPlayer(sp,
+                    new SyncAttributesPacket(PlayerAttributesProvider.getAttributes(player)));
+        }
+
         return true;
     }
 

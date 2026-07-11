@@ -31,6 +31,9 @@ public class HeartOfMechanicalDragon extends AccessoryItem implements Ability
     @Override
     public void tick(Player player)
     {
+        if (player.level().isClientSide())
+            return;
+
         Integer cd = cooldownMap.get(player.getUUID());
         if (cd != null && cd > 0)
             cooldownMap.put(player.getUUID(), cd - 1);

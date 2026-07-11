@@ -100,7 +100,6 @@ public class Fatality
     {
         if (event.getPlayer() == null) return;
         var player = (ServerPlayer) event.getPlayer();
-        if (player.level().isClientSide()) return;
 
         var stack = event.getOriginalStack();
         if (!stack.is(ItemTags.LOGS)) return;

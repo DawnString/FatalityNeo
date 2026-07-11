@@ -85,12 +85,10 @@ public class AccessoryManager
 
         if (healthBonus > 0)
         {
-            double current = player.getHealth();
-            double currentMax = player.getMaxHealth();
-            if (current == currentMax - healthBonus)
+            float oldMax = player.getMaxHealth() - healthBonus;
+            // 浮点公差比较：之前如果接近满血则补满
+            if (player.getHealth() >= oldMax - 0.01f)
                 player.heal(healthBonus);
-            else
-                player.setHealth(player.getHealth() + healthBonus);
         }
     }
 

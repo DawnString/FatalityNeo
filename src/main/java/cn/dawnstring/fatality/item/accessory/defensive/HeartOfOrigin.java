@@ -56,6 +56,9 @@ public class HeartOfOrigin extends AccessoryItem implements Ability
             return;
         lastTick.put(player.getUUID(), player.tickCount);
 
+        if (player.level().isClientSide())
+            return;
+
         ShieldData data = shieldMap.get(player.getUUID());
         if (data == null)
         {

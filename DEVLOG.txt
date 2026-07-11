@@ -136,3 +136,35 @@ accessory/defensive
 -HudOverlayRegistry
 -BaseWingItem
 -Fatality
+
+2026/7/11 12/36批量修复漏洞
+-EmblemOfFinality
+-WatchersEye
+-NaturesShelter
+-HeartOfOrigin
+-HeartOfMechanicalDragon
+-MemoryBulwark
+-ArmorHandler
+-MixinLivingEntityArmor
+-AccessoryManager
+-RegenSystem
+-Fatality
+
+1.修复 EmblemOfFinality/WatchersEye/NaturesShelter 三人游戏串号bug
+  -Minecraft物品是单例，实例字段在所有装备者间共享
+  -改为 static Map<UUID, T> 按玩家隔离数据
+2.修复 HeartOfOrigin/HeartOfMechanicalDragon 客户端空跑tick
+  -添加 isClientSide()，与服务端逻辑隔离
+3.修复 MemoryBulwark 卸下饰品后未清理damageMap
+  -添加 onUnequipped() 清理
+4.修复 ArmorHandler 只计算饰品护甲，忽略原版盔甲
+  -attributes.getArmor() -> player.getArmorValue()（含原版+饰品）
+  -attributes.getArmorToughness() -> player.getAttributeValue(ARMOR_TOUGHNESS)
+5.修复 MixinLivingEntityArmor 绕过 BYPASSES_ARMOR 标签
+  -添加 source.is(DamageTypeTags.BYPASSES_ARMOR) 检测，跳过自定义计算
+6.修复 syncVanillaAttributes 浮点精确相等判断 + 血量超额
+  -浮点比较改为公差 oldMax - 0.01f
+  -移除 else setHealth(...) 分支，避免生命值超出新上限
+7.修复 RegenSystem 法力自然恢复不同步到客户端
+  -manaCooldown<=0 恢复法力时发包同步
+8.移除 Fatality.onFirstWood 中 ServerPlayer 后的冗余代码
