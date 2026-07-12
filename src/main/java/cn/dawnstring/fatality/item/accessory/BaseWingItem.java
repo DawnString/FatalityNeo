@@ -214,8 +214,10 @@ public class BaseWingItem extends AccessoryItem implements Ability
         player.getPersistentData().putInt(TAG_FLIGHT_TIME, time);
     }
 
-    public static void remove(UUID uuid)
+    @Override
+    public void onRemove(Player player)
     {
+        UUID uuid = player.getUUID();
         FLIGHT_TIME.remove(uuid);
         PROCESSED_TICK.remove(uuid);
     }

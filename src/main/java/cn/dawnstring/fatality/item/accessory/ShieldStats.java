@@ -6,8 +6,8 @@ package cn.dawnstring.fatality.item.accessory;
  * @param dashSpeed 冲刺速度
  * @param dashDuration 冲刺持续时间tick
  * @param cooldown 冷却时间tick
- * @param knockbackStrength 反冲力度
- * @param damageOnHit 穿透伤害
+ * @param knockbackStrength 反冲力度(KNOCKBACK)
+ * @param damageOnHit 穿透伤害(PHASE)
  * @param type KNOCKBACK PHASE
  */
 public record ShieldStats(
@@ -18,8 +18,3 @@ public record ShieldStats(
         double damageOnHit,
         ShieldType type
 ) {}
-
-enum ShieldType
-{
-    KNOCKBACK, PHASE
-}

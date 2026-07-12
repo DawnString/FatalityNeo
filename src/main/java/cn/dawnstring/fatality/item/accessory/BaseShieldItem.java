@@ -1,9 +1,13 @@
 package cn.dawnstring.fatality.item.accessory;
 
 import cn.dawnstring.fatality.utils.KeyUtil;
+import cn.dawnstring.fatality.utils.TooltipHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
@@ -18,6 +22,8 @@ public class BaseShieldItem extends AccessoryItem
 
     private final ShieldStats shieldStats;
 
+    private boolean isDash = false;
+
     public BaseShieldItem(ShieldStats shieldStats, List<StatModifier> modifiers)
     {
         super(modifiers);
@@ -27,6 +33,23 @@ public class BaseShieldItem extends AccessoryItem
     public ShieldStats getShieldStats()
     {
         return shieldStats;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag)
+    {
+        StringBuilder sb = new StringBuilder();
+        String typeKey = shieldStats.type() == ShieldType.KNOCKBACK
+                ? "shield.fatality.type.knockback" : "shield.fatality.type.phase";
+        sb.append("§7").append(Component.translatable("shield.fatality.type").getString()).append(": §e").append(Component.translatable(typeKey).getString()).append("\n");
+        sb.append("§7").append(Component.translatable("shield.fatality.dashSpeed").getString()).append(": §e").append(String.format("%.1f", shieldStats.dashSpeed() * 20)).append(" m/s\n");
+        sb.append("§7").append(Component.translatable("shield.fatality.dashDuration").getString()).append(": §e").append(shieldStats.dashDuration()).append(" tick\n");
+        sb.append("§7").append(Component.translatable("shield.fatality.cooldown").getString()).append(": §e").append(String.format("%.1f", shieldStats.cooldown() / 20.0f)).append(" s\n");
+        if (shieldStats.type() == ShieldType.KNOCKBACK)
+            sb.append("§7").append(Component.translatable("shield.fatality.knockbackStrength").getString()).append(": §e").append(String.format("%.1f", shieldStats.knockbackStrength()));
+        else
+            sb.append("§7").append(Component.translatable("shield.fatality.damageOnHit").getString()).append(": §e").append(String.format("%.1f", shieldStats.damageOnHit()));
+        TooltipHelper.addDescriptiveTooltip(stack, tooltip, flag, null, sb.toString(), false);
     }
 
     @Override
@@ -200,8 +223,10 @@ public class BaseShieldItem extends AccessoryItem
         }
     }
 
-    public static void remove(UUID uuid)
+    @Override
+    public void onRemove(Player player)
     {
+        UUID uuid = player.getUUID();
         DASH_STATE.remove(uuid);
         PROCESSED_TICK.remove(uuid);
         LAST_DASH_POS.remove(uuid);

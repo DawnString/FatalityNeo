@@ -47,6 +47,14 @@
   "wing.fatality.glideSpeed": "Glide Speed",
   "wing.fatality.maxFlightTime": "Flight Time",
   "wing.fatality.horizontalDrag": "Drag Coefficient",
+  "shield.fatality.type": "Type",
+  "shield.fatality.type.knockback": "Knockback",
+  "shield.fatality.type.phase": "Phase",
+  "shield.fatality.dashSpeed": "Dash Speed",
+  "shield.fatality.dashDuration": "Dash Duration",
+  "shield.fatality.cooldown": "Cooldown",
+  "shield.fatality.knockbackStrength": "Knockback Strength",
+  "shield.fatality.damageOnHit": "Phase Damage",
   "gui.fatality.final_words": "Final Words",
   "gui.fatality.guide.no_content": "Select an entry",
   "gui.fatality.guide.prev": "Prev",
@@ -95,6 +103,13 @@
 
   "item.fatality.final_words": "Final Words",
   "item.fatality.final_words.desc":"The world's end is where your journey begins.",
+  "item.fatality.copper_coin": "Copper Coin",
+  "item.fatality.iron_coin": "Iron Coin",
+  "item.fatality.golden_coin": "Golden Coin",
+  "item.fatality.golden_coin.unique": "Generally speaking,The FIRST which get its item textures",
+  "item.fatality.diamond_coin": "Diamond Coin",
+  "item.fatality.emerald_coin": "Emerald Coin",
+  "item.fatality.netherite_coin": "Netherite Coin",
 
   "item.fatality.aiming_lens": "Aiming Lens",
   "item.fatality.amulet_of_precision": "Amulet of Precision",
@@ -286,5 +301,13 @@
   "item.fatality.wither_wings": "Wither Wings",
   "item.fatality.withering_armor": "Withering Armor",
   "item.fatality.wraith_cloak": "Wraith Cloak",
-  "item.fatality.wraith_wings": "Wraith Wings"
+  "item.fatality.wraith_wings": "Wraith Wings",
+  "item.fatality.mark_of_vengeance": "Mark of Vengeance",
+  "item.fatality.rage_totem": "Rage Totem",
+  "item.fatality.magnetite_stone": "Magnetite Stone",
+  "item.fatality.divine_shield": "Divine Shield",
+  "item.fatality.elemental_array_shield": "Elemental Array Shield",
+  "item.fatality.night_vision_goggles": "Night Vision Goggles",
+  "item.fatality.spirit_fire_shield": "Spirit Fire Shield",
+  "item.fatality.hidden_blade": "Hidden Blade"
 }

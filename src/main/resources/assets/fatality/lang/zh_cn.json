@@ -47,6 +47,14 @@
   "wing.fatality.glideSpeed": "滑翔速度",
   "wing.fatality.maxFlightTime": "飞行时间",
   "wing.fatality.horizontalDrag": "减速系数",
+  "shield.fatality.type": "类型",
+  "shield.fatality.type.knockback": "反冲",
+  "shield.fatality.type.phase": "穿透",
+  "shield.fatality.dashSpeed": "冲刺速度",
+  "shield.fatality.dashDuration": "冲刺时长",
+  "shield.fatality.cooldown": "冷却时间",
+  "shield.fatality.knockbackStrength": "反冲力度",
+  "shield.fatality.damageOnHit": "穿透伤害",
   "gui.fatality.final_words": "终末之言",
   "gui.fatality.guide.no_content": "请选择一个条目",
   "gui.fatality.guide.prev": "上一页",
@@ -95,6 +103,13 @@
 
   "item.fatality.final_words": "终末之言",
   "item.fatality.final_words.desc": "世界的终点，是你冒险的起点",
+  "item.fatality.copper_coin": "铜币",
+  "item.fatality.iron_coin": "铁币",
+  "item.fatality.golden_coin": "金币",
+  "item.fatality.golden_coin.unique": "一般来说，这是第一个有材质的物品",
+  "item.fatality.diamond_coin": "钻石币",
+  "item.fatality.emerald_coin": "绿宝石币",
+  "item.fatality.netherite_coin": "下界合金币",
 
   "item.fatality.aiming_lens": "瞄准透镜",
   "item.fatality.amulet_of_precision": "精准护符",
@@ -286,5 +301,13 @@
   "item.fatality.wither_wings": "凋零翼",
   "item.fatality.withering_armor": "凋零甲",
   "item.fatality.wraith_cloak": "幽灵斗篷",
-  "item.fatality.wraith_wings": "幽灵翼"
+  "item.fatality.wraith_wings": "幽灵翼",
+  "item.fatality.mark_of_vengeance": "复仇印记",
+  "item.fatality.rage_totem": "狂暴图腾",
+  "item.fatality.magnetite_stone": "磁铁矿",
+  "item.fatality.divine_shield": "神圣盾",
+  "item.fatality.elemental_array_shield": "元素阵列盾",
+  "item.fatality.night_vision_goggles": "夜视护目镜",
+  "item.fatality.spirit_fire_shield": "灵火盾",
+  "item.fatality.hidden_blade": "隐刃"
 }

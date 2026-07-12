@@ -8,8 +8,6 @@ import cn.dawnstring.fatality.core.combat.ArmorStatManager;
 import cn.dawnstring.fatality.core.combat.RegenSystem;
 import cn.dawnstring.fatality.core.input.PlayerInputState;
 import cn.dawnstring.fatality.core.network.SyncAttributesPacket;
-import cn.dawnstring.fatality.item.accessory.BaseShieldItem;
-import cn.dawnstring.fatality.item.accessory.BaseWingItem;
 import cn.dawnstring.fatality.utils.KeyUtil;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -65,12 +63,10 @@ public class ModEvents
         if (event.getEntity() instanceof ServerPlayer player)
         {
             AccessoryManager.save(player);
-            AccessoryManager.remove(player.getUUID());
+            AccessoryManager.remove(player);
             PlayerAttributesProvider.remove(player.getUUID());
             RegenSystem.remove(player.getUUID());
             PlayerInputState.remove(player.getUUID());
-            BaseWingItem.remove(player.getUUID());
-            BaseShieldItem.remove(player.getUUID());
             KeyUtil.reset(player.getUUID());
         }
     }
@@ -83,12 +79,10 @@ public class ModEvents
         for (ServerPlayer player : players)
         {
             AccessoryManager.save(player);
-            AccessoryManager.remove(player.getUUID());
+            AccessoryManager.remove(player);
             PlayerAttributesProvider.remove(player.getUUID());
             RegenSystem.remove(player.getUUID());
             PlayerInputState.remove(player.getUUID());
-            BaseWingItem.remove(player.getUUID());
-            BaseShieldItem.remove(player.getUUID());
             KeyUtil.reset(player.getUUID());
         }
     }

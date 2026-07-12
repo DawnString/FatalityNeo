@@ -188,3 +188,14 @@ accessory/defensive
 -RegenSystem
 以及一些运用了这些加成的饰品等
 并且添加i18n
+
+2026/7/12 16/32 添加了功能性饰品以及杂项饰品
+为AccessoryItem添加onRemove()方法，方便进行后期维护
+-accessory/functional
+-CopperCoin
+-DiamondCoin
+-EmeraldCoin
+-GoldenCoin 庆祝这个物品有了第一次材质，除开FinalWords
+-IronCoin
+-NetheriteCoin
+-MiscItem

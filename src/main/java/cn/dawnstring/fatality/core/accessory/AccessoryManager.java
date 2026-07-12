@@ -233,6 +233,22 @@ public class AccessoryManager
         prevEquipment.remove(uuid);
     }
 
+    public static void remove(Player player)
+    {
+        UUID uuid = player.getUUID();
+        SimpleContainer inv = serverMap.get(uuid);
+        if (inv != null)
+        {
+            for (int i = 0; i < SLOT_COUNT; i++)
+            {
+                ItemStack stack = inv.getItem(i);
+                if (!stack.isEmpty() && stack.getItem() instanceof AccessoryItem acc)
+                    acc.onRemove(player);
+            }
+        }
+        remove(uuid);
+    }
+
     /**
      * 原地刷新饰品容器
      */

@@ -39,6 +39,9 @@ public class AccessoryItem extends Item
     //从饰品栏移除时触发
     public void onUnequipped(Player player) {}
 
+    //玩家登出/服务器关闭时清理静态状态（如有）
+    public void onRemove(Player player) {}
+
     public void setUniqueDes(Component uniqueDes)
     {
         this.uniqueDes = uniqueDes;
