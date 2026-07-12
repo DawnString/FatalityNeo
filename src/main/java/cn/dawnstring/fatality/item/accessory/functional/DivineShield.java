@@ -33,6 +33,8 @@ public class DivineShield extends BaseShieldItem
     @Override
     public void tick(Player player)
     {
-        ParticleUtil.spawnSphereParticles(player.level(), ParticleTypes.END_ROD, player, 1, 12, 0.1);
+        super.tick(player);
+        if (isDashing(player))
+            ParticleUtil.spawnSphereParticles(player.level(), ParticleTypes.END_ROD, player, 1, 12, 0.1);
     }
 }

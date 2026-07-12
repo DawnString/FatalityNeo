@@ -1,6 +1,5 @@
 package cn.dawnstring.fatality.item.accessory;
 
-import cn.dawnstring.fatality.utils.KeyUtil;
 import cn.dawnstring.fatality.utils.TooltipHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -21,8 +20,6 @@ public class BaseShieldItem extends AccessoryItem
     private static final Map<UUID, BlockPos> LAST_DASH_POS = new ConcurrentHashMap<>();
 
     private final ShieldStats shieldStats;
-
-    private boolean isDash = false;
 
     public BaseShieldItem(ShieldStats shieldStats, List<StatModifier> modifiers)
     {
@@ -63,25 +60,13 @@ public class BaseShieldItem extends AccessoryItem
             return;
         }
 
-        // 双击方向键检测（每 tick 无条件执行以更新上升沿）
-        if (KeyUtil.consumeDoubleTapW(player))
-            startDash(player, Direction.FORWARD);
-
-        if (KeyUtil.consumeDoubleTapS(player))
-            startDash(player, Direction.BACKWARD);
-
-        if (KeyUtil.consumeDoubleTapA(player))
-            startDash(player, Direction.LEFT);
-
-        if (KeyUtil.consumeDoubleTapD(player))
-            startDash(player, Direction.RIGHT);
-
+        // 由客户端 DashPayload 触发冲刺，此处仅处理状态更新
         tickShieldState(player);
     }
 
     private void tickClient(Player player) {}
 
-    private void startDash(Player player, Direction direction)
+    public void startDash(Player player, Direction direction)
     {
         UUID uuid = player.getUUID();
 
@@ -223,6 +208,15 @@ public class BaseShieldItem extends AccessoryItem
         }
     }
 
+    /**
+     * 判断玩家是否正在冲刺（用于粒子效果等）
+     */
+    public static boolean isDashing(Player player)
+    {
+        ShieldState state = DASH_STATE.get(player.getUUID());
+        return state != null && state.mode() == DashMode.DASHING;
+    }
+
     @Override
     public void onRemove(Player player)
     {
@@ -251,4 +245,3 @@ record ShieldState(
 ) {}
 
 enum DashMode { IDLE, DASHING, COOLDOWN }
-enum Direction { FORWARD, BACKWARD, LEFT, RIGHT }

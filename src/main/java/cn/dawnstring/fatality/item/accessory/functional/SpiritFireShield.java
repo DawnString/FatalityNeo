@@ -34,6 +34,7 @@ public class SpiritFireShield extends BaseShieldItem
     @Override
     public void tick(Player player)
     {
+        super.tick(player);
         ParticleUtil.spawnSphereParticles(player.level(), ParticleTypes.FLAME, player, 1, 12, 0.1);
     }
 }

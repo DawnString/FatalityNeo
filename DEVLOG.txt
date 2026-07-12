@@ -199,3 +199,9 @@ accessory/defensive
 -IronCoin
 -NetheriteCoin
 -MiscItem
+
+2026/7/12 改变BaseShieldItem的检测逻辑
+-Direction
+-ClientInputHandler
+-Fatality
+-BaseShieldItem

@@ -33,7 +33,11 @@ public class ElementalArrayShield extends BaseShieldItem
     @Override
     public void tick(Player player)
     {
-        ParticleUtil.spawnSphereParticles(player.level(), ParticleTypes.LAVA, player, 1, 12, 0.1);
-        ParticleUtil.spawnSphereParticles(player.level(), ParticleTypes.DRIPPING_WATER, player, 1, 12, 0.1);
+        super.tick(player);
+        if (isDashing(player))
+        {
+            ParticleUtil.spawnSphereParticles(player.level(), ParticleTypes.LAVA, player, 1, 12, 0.1);
+            ParticleUtil.spawnSphereParticles(player.level(), ParticleTypes.DRIPPING_WATER, player, 1, 12, 0.1);
+        }
     }
 }

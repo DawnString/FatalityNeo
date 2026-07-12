@@ -2,8 +2,11 @@ package cn.dawnstring.fatality;
 
 import cn.dawnstring.fatality.client.gui.hud.HudOverlayRegistry;
 import cn.dawnstring.fatality.guide.loader.GuideLoader;
+import cn.dawnstring.fatality.core.accessory.AccessoryManager;
 import cn.dawnstring.fatality.core.input.PlayerInputState;
 import cn.dawnstring.fatality.core.register.ClientModEvents;
+import cn.dawnstring.fatality.item.accessory.BaseShieldItem;
+import cn.dawnstring.fatality.item.accessory.Direction;
 import cn.dawnstring.fatality.network.PlayerInputPayload;
 import cn.dawnstring.fatality.network.SyncEffectPayload;
 import cn.dawnstring.fatality.network.TotemAnimationPayload;
@@ -65,7 +68,7 @@ public class Fatality
                             mc.player.playSound(net.minecraft.sounds.SoundEvents.TOTEM_USE, 1.0f, 1.0f);
                     });
 
-            //玩家输入检测
+            //玩家输入检测（内含双击冲刺标记）
             registrar.playToServer(
                     PlayerInputPayload.TYPE,
                     PlayerInputPayload.STREAM_CODEC,
@@ -75,6 +78,25 @@ public class Fatality
                         PlayerInputState.update(player.getUUID(),
                                 payload.jumping(), payload.sneaking(),
                                 payload.forwardImpulse(), payload.leftImpulse());
+
+                        // 客户端检测到双击方向键，触发冲刺
+                        if (payload.dashDirection() >= 0)
+                        {
+                            boolean found = false;
+                            var inv = AccessoryManager.getInventory(player);
+                            for (int i = 0; i < AccessoryManager.SLOT_COUNT; i++)
+                            {
+                                ItemStack stack = inv.getItem(i);
+                                if (stack.getItem() instanceof BaseShieldItem shield)
+                                {
+                                    shield.startDash(player, Direction.values()[payload.dashDirection()]);
+                                    found = true;
+                                    break;
+                                }
+                            }
+                            if (!found)
+                                Fatality.LOGGER.warn("DashPayload ignored: no BaseShieldItem found for {}", player.getName().getString());
+                        }
                     });
 
             //玩家光效同步
