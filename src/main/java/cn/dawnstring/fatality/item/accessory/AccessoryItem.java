@@ -1,5 +1,6 @@
 package cn.dawnstring.fatality.item.accessory;
 
+import cn.dawnstring.fatality.item.UniqueItemType;
 import cn.dawnstring.fatality.utils.TooltipHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
@@ -14,7 +15,10 @@ import java.util.List;
 public class AccessoryItem extends Item
 {
     private final List<StatModifier> modifiers;
+    private Component story;
     private Component uniqueDes;
+    private Component defaultDes;
+    private Component uniqueItemTypeDes;
 
     public AccessoryItem(List<StatModifier> modifiers)
     {
@@ -42,9 +46,30 @@ public class AccessoryItem extends Item
     //玩家登出/服务器关闭时清理静态状态（如有）
     public void onRemove(Player player) {}
 
+    public void setStory(Component story)
+    {
+        this.story = story;
+    }
+
     public void setUniqueDes(Component uniqueDes)
     {
         this.uniqueDes = uniqueDes;
+    }
+
+    public void setDefaultDes(Component defaultDes)
+    {
+        this.defaultDes = defaultDes;
+    }
+
+    public void setUniqueItemTypeDes(UniqueItemType  uniqueItemTypeDes)
+    {
+        switch (uniqueItemTypeDes)
+        {
+            case SUPPORTER_ITEM:
+                this.uniqueItemTypeDes = Component.translatable("des.fatality.supporter_item");
+            case DEVELOPER_ITEM:
+                this.uniqueItemTypeDes = Component.translatable("des.fatality.developer_item");
+        }
     }
 
     @Override
@@ -75,11 +100,16 @@ public class AccessoryItem extends Item
         }
         if (uniqueDes != null)
             att.append(uniqueDes.getString()).append("\n");
-        TooltipHelper.addDescriptiveTooltip(stack,
-                tooltip,
-                flag,
-                null,
-                att.toString(),
-                false);
+
+        if (story != null)
+            TooltipHelper.addDescriptiveTooltip(stack, tooltip, flag, story.getString(), att.toString(), false);
+        else
+            TooltipHelper.addDescriptiveTooltip(stack, tooltip, flag, null, att.toString(), false);
+
+        if (defaultDes != null)
+            TooltipHelper.addDefaultTooltip(tooltip, defaultDes.getString(), false);
+
+        if (uniqueItemTypeDes != null)
+            TooltipHelper.addDefaultTooltip(tooltip, uniqueItemTypeDes.getString(), true);
     }
 }

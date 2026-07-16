@@ -101,6 +101,9 @@
   "key.fatality.alt": "Alt",
   "key.fatality.shift": "Shift",
 
+  "des.fatality.supporter_item": "- 支持者物品 -",
+  "des.fatality.developer_item": "- 开发者物品 -",
+
   "item.fatality.final_words": "终末之言",
   "item.fatality.final_words.desc": "世界的终点，是你冒险的起点",
   "item.fatality.copper_coin": "铜币",

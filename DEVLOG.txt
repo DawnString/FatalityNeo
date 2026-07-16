@@ -205,3 +205,10 @@ accessory/defensive
 -ClientInputHandler
 -Fatality
 -BaseShieldItem
+
+2026/7/16 14/11 添加了一些物品描述
+-AccessoryItem
+-BaseArmorItem
+-MiscItem
+-WeaponItem
+-UniqueItemType

@@ -101,6 +101,9 @@
   "key.fatality.alt": "Alt",
   "key.fatality.shift": "Shift",
 
+  "des.fatality.supporter_item": "- Support Item -",
+  "des.fatality.developer_item": "- Developer Item -",
+
   "item.fatality.final_words": "Final Words",
   "item.fatality.final_words.desc":"The world's end is where your journey begins.",
   "item.fatality.copper_coin": "Copper Coin",

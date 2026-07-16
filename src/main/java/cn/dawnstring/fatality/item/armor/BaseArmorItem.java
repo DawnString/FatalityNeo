@@ -1,5 +1,6 @@
 package cn.dawnstring.fatality.item.armor;
 
+import cn.dawnstring.fatality.item.UniqueItemType;
 import cn.dawnstring.fatality.utils.TooltipHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -16,6 +17,11 @@ public class BaseArmorItem extends ArmorItem
 {
     private final ArmorStats armorStats;
 
+    private Component story;
+    private Component uniqueDes;
+    private Component defaultDes;
+    private Component uniqueItemTypeDes;
+
     public BaseArmorItem(DeferredHolder<ArmorMaterial, ArmorMaterial> material, ArmorItem.Type type, ArmorStats stats, Properties properties)
     {
         super(material, type, properties);
@@ -27,6 +33,32 @@ public class BaseArmorItem extends ArmorItem
         return armorStats;
     }
 
+    public void setStory(Component story)
+    {
+        this.story = story;
+    }
+
+    public void setUniqueDes(Component uniqueDes)
+    {
+        this.uniqueDes = uniqueDes;
+    }
+
+    public void setDefaultDes(Component defaultDes)
+    {
+        this.defaultDes = defaultDes;
+    }
+
+    public void setUniqueItemTypeDes(UniqueItemType uniqueItemTypeDes)
+    {
+        switch (uniqueItemTypeDes)
+        {
+            case SUPPORTER_ITEM:
+                this.uniqueItemTypeDes = Component.translatable("des.fatality.supporter_item");
+            case DEVELOPER_ITEM:
+                this.uniqueItemTypeDes = Component.translatable("des.fatality.developer_item");
+        }
+    }
+
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag)
     {
@@ -34,6 +66,19 @@ public class BaseArmorItem extends ArmorItem
         sb.append("§7").append(Component.translatable("stat.fatality.damageReduction").getString()).append(": §e+").append(String.format("%.1f", armorStats.damageReduction() * 100)).append("%\n");
         sb.append("§7").append(Component.translatable("stat.fatality.penetrationResistance").getString()).append(": §e+").append(String.format("%.1f", armorStats.penetrationResistance() * 100)).append("%\n");
         sb.append("§7").append(Component.translatable("stat.fatality.penetrationResistanceCoefficient").getString()).append(": §e+").append(String.format("%.1f", armorStats.penetrationResistanceCoefficient() * 100)).append("%");
-        TooltipHelper.addDescriptiveTooltip(stack, tooltip, flag, null, sb.toString(), false);
+
+        if (uniqueDes != null)
+            sb.append(uniqueDes.getString()).append("\n");
+
+        if (story != null)
+            TooltipHelper.addDescriptiveTooltip(stack, tooltip, flag, story.getString(), sb.toString(), false);
+        else
+            TooltipHelper.addDescriptiveTooltip(stack, tooltip, flag, null, sb.toString(), false);
+
+        if (defaultDes != null)
+            TooltipHelper.addDefaultTooltip(tooltip, defaultDes.getString(), false);
+
+        if (uniqueItemTypeDes != null)
+            TooltipHelper.addDefaultTooltip(tooltip, uniqueItemTypeDes.getString(), true);
     }
 }
