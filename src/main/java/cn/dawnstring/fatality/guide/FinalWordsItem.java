@@ -2,7 +2,7 @@ package cn.dawnstring.fatality.guide;
 
 import cn.dawnstring.fatality.item.ItemCategory;
 import cn.dawnstring.fatality.register.AutoItem;
-import cn.dawnstring.fatality.utils.TooltipHelper;
+import cn.dawnstring.fatality.utils.TooltipUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -36,6 +36,6 @@ public class FinalWordsItem extends Item
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag)
     {
         String des = Component.translatable("item.fatality.final_words.desc").getString();
-        TooltipHelper.addDefaultTooltip(tooltip, des, true);
+        TooltipUtil.addDefaultTooltip(tooltip, des, true);
     }
 }

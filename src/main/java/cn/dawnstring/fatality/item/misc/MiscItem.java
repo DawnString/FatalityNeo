@@ -1,7 +1,7 @@
 package cn.dawnstring.fatality.item.misc;
 
 import cn.dawnstring.fatality.item.UniqueItemType;
-import cn.dawnstring.fatality.utils.TooltipHelper;
+import cn.dawnstring.fatality.utils.TooltipUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -45,16 +45,16 @@ public class MiscItem extends Item
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
         if (uniqueDes != null)
-            TooltipHelper.addDefaultTooltip(
+            TooltipUtil.addDefaultTooltip(
                     tooltipComponents,
                     uniqueDes.getString(),
                     false
             );
 
         if  (defaultDes != null)
-            TooltipHelper.addDefaultTooltip(tooltipComponents, defaultDes.getString(), false);
+            TooltipUtil.addDefaultTooltip(tooltipComponents, defaultDes.getString(), false);
 
         if (uniqueItemTypeDes != null)
-            TooltipHelper.addDefaultTooltip(tooltipComponents, uniqueItemTypeDes.getString(), true);
+            TooltipUtil.addDefaultTooltip(tooltipComponents, uniqueItemTypeDes.getString(), true);
     }
 }

@@ -1,7 +1,7 @@
 package cn.dawnstring.fatality.item.weapon;
 
 import cn.dawnstring.fatality.item.UniqueItemType;
-import cn.dawnstring.fatality.utils.TooltipHelper;
+import cn.dawnstring.fatality.utils.TooltipUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -71,13 +71,13 @@ public abstract class WeaponItem extends Item
             sb.append(uniqueDes.getString()).append("\n");
 
         if (story != null)
-            TooltipHelper.addDescriptiveTooltip(stack, tooltip, flag, story.getString(), sb.toString(), false);
+            TooltipUtil.addDescriptiveTooltip(stack, tooltip, flag, story.getString(), sb.toString(), false);
         else
-            TooltipHelper.addDescriptiveTooltip(stack, tooltip, flag, null, sb.toString(), false);
+            TooltipUtil.addDescriptiveTooltip(stack, tooltip, flag, null, sb.toString(), false);
 
-        TooltipHelper.addDefaultTooltip(tooltip, defaultDes.getString(), false);
+        TooltipUtil.addDefaultTooltip(tooltip, defaultDes.getString(), false);
 
         if (uniqueItemTypeDes != null)
-            TooltipHelper.addDefaultTooltip(tooltip, uniqueItemTypeDes.getString(), true);
+            TooltipUtil.addDefaultTooltip(tooltip, uniqueItemTypeDes.getString(), true);
     }
 }

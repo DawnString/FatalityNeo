@@ -212,3 +212,16 @@ accessory/defensive
 -MiscItem
 -WeaponItem
 -UniqueItemType
+
+2026/7/20 0/48 重命名TooltipHelper为TooltipUtil 添加游戏图标 添加全部饰品贴图 添加物品描述
+-ClientModEvents
+-FinalWordsItem
+-AccessoryItem
+-BaseShieldItem
+-BaseWingItem
+-BaseArmorItem
+-MiscItem
+-WeaponItem
+-TooltipUtil
+-Fatality
+完成了1/4

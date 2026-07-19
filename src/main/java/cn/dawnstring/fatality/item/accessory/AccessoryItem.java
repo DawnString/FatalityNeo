@@ -1,7 +1,7 @@
 package cn.dawnstring.fatality.item.accessory;
 
 import cn.dawnstring.fatality.item.UniqueItemType;
-import cn.dawnstring.fatality.utils.TooltipHelper;
+import cn.dawnstring.fatality.utils.TooltipUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
@@ -102,14 +102,14 @@ public class AccessoryItem extends Item
             att.append(uniqueDes.getString()).append("\n");
 
         if (story != null)
-            TooltipHelper.addDescriptiveTooltip(stack, tooltip, flag, story.getString(), att.toString(), false);
+            TooltipUtil.addDescriptiveTooltip(stack, tooltip, flag, story.getString(), att.toString(), false);
         else
-            TooltipHelper.addDescriptiveTooltip(stack, tooltip, flag, null, att.toString(), false);
+            TooltipUtil.addDescriptiveTooltip(stack, tooltip, flag, null, att.toString(), false);
 
         if (defaultDes != null)
-            TooltipHelper.addDefaultTooltip(tooltip, defaultDes.getString(), false);
+            TooltipUtil.addDefaultTooltip(tooltip, defaultDes.getString(), false);
 
         if (uniqueItemTypeDes != null)
-            TooltipHelper.addDefaultTooltip(tooltip, uniqueItemTypeDes.getString(), true);
+            TooltipUtil.addDefaultTooltip(tooltip, uniqueItemTypeDes.getString(), true);
     }
 }

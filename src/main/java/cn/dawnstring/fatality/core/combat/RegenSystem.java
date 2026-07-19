@@ -77,7 +77,7 @@ public class RegenSystem
         RegenData data = dataMap.computeIfAbsent(player.getUUID(),
                 id -> new RegenData(0, 0, 0));
         data.healthCooldown = PAUSE_TICKS;
-        data.manaCooldown = PAUSE_TICKS;
+        //data.manaCooldown = PAUSE_TICKS;
         data.healthTickTimer = 0;
     }
 

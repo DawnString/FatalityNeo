@@ -2,7 +2,7 @@ package cn.dawnstring.fatality.item.accessory;
 
 import cn.dawnstring.fatality.core.ability.Ability;
 import cn.dawnstring.fatality.core.input.PlayerInputState;
-import cn.dawnstring.fatality.utils.TooltipHelper;
+import cn.dawnstring.fatality.utils.TooltipUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
@@ -59,7 +59,7 @@ public class BaseWingItem extends AccessoryItem implements Ability
         sb.append("§7").append(Component.translatable("wing.fatality.maxFlightTime").getString()).append(": §e").append(String.format("%.1f", wingStats.maxFlightTime() / 20.0f)).append(" s\n");
         if (wingStats.horizontalDrag() > 0)
             sb.append("§7").append(Component.translatable("wing.fatality.horizontalDrag").getString()).append(": §e").append(String.format("%.2f", wingStats.horizontalDrag()));
-        TooltipHelper.addDescriptiveTooltip(stack, tooltip, flag, null, sb.toString(), false);
+        TooltipUtil.addDescriptiveTooltip(stack, tooltip, flag, null, sb.toString(), false);
     }
 
     public static int getRemainingFlightTime(Player player)

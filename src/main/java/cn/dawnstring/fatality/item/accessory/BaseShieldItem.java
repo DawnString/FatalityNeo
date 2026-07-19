@@ -1,6 +1,6 @@
 package cn.dawnstring.fatality.item.accessory;
 
-import cn.dawnstring.fatality.utils.TooltipHelper;
+import cn.dawnstring.fatality.utils.TooltipUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
@@ -46,7 +46,7 @@ public class BaseShieldItem extends AccessoryItem
             sb.append("§7").append(Component.translatable("shield.fatality.knockbackStrength").getString()).append(": §e").append(String.format("%.1f", shieldStats.knockbackStrength()));
         else
             sb.append("§7").append(Component.translatable("shield.fatality.damageOnHit").getString()).append(": §e").append(String.format("%.1f", shieldStats.damageOnHit()));
-        TooltipHelper.addDescriptiveTooltip(stack, tooltip, flag, null, sb.toString(), false);
+        TooltipUtil.addDescriptiveTooltip(stack, tooltip, flag, null, sb.toString(), false);
     }
 
     @Override

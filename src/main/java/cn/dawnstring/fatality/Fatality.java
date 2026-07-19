@@ -22,6 +22,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.common.NeoForge;
@@ -50,8 +51,10 @@ public class Fatality
 
         modEventBus.addListener(RegisterGuiLayersEvent.class, HudOverlayRegistry::onRegisterLayers);
 
-
         modEventBus.addListener(EntityRenderersEvent.AddLayers.class, ClientModEvents::onAddLayers);
+
+        modEventBus.addListener(FMLClientSetupEvent.class, ClientModEvents::onClientSetup);
+
         modEventBus.addListener(RegisterPayloadHandlersEvent.class, event ->
         {
             var registrar = event.registrar(Fatality.MODID);
