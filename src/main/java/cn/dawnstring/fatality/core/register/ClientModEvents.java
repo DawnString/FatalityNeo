@@ -2,6 +2,8 @@ package cn.dawnstring.fatality.core.register;
 
 import cn.dawnstring.fatality.Fatality;
 import cn.dawnstring.fatality.client.effect.PlayerEffectLayer;
+import cn.dawnstring.fatality.client.renderer.entity.WeaponProjectileRenderer;
+import cn.dawnstring.fatality.register.ModEntityTypes;
 import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
@@ -27,6 +29,12 @@ public class ClientModEvents
         PlayerRenderer slimRenderer = event.getSkin(PlayerSkin.Model.SLIM);
         if (slimRenderer != null)
             slimRenderer.addLayer(new PlayerEffectLayer(slimRenderer));
+    }
+
+    public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event)
+    {
+        event.registerEntityRenderer(ModEntityTypes.WEAPON_PROJECTILE.get(),
+                WeaponProjectileRenderer::new);
     }
 
     //游戏图标

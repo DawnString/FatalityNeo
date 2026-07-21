@@ -1,18 +1,21 @@
 package cn.dawnstring.fatality;
 
 import cn.dawnstring.fatality.client.gui.hud.HudOverlayRegistry;
+import cn.dawnstring.fatality.core.combat.WeaponHandler;
 import cn.dawnstring.fatality.guide.loader.GuideLoader;
 import cn.dawnstring.fatality.core.accessory.AccessoryManager;
 import cn.dawnstring.fatality.core.input.PlayerInputState;
 import cn.dawnstring.fatality.core.register.ClientModEvents;
 import cn.dawnstring.fatality.item.accessory.BaseShieldItem;
 import cn.dawnstring.fatality.item.accessory.Direction;
+import cn.dawnstring.fatality.network.C2SAttackIntent;
 import cn.dawnstring.fatality.network.PlayerInputPayload;
 import cn.dawnstring.fatality.network.SyncEffectPayload;
 import cn.dawnstring.fatality.network.TotemAnimationPayload;
 import cn.dawnstring.fatality.item.armor.ModArmorMaterials;
 import cn.dawnstring.fatality.register.AutoItemRegistry;
 import cn.dawnstring.fatality.register.ModCreativeTabs;
+import cn.dawnstring.fatality.register.ModEntityTypes;
 import cn.dawnstring.fatality.utils.PlayerEffectUtil;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -48,10 +51,13 @@ public class Fatality
         ModArmorMaterials.register(modEventBus);
         AutoItemRegistry.registerItems(modEventBus);
         ModCreativeTabs.register(modEventBus);
+        ModEntityTypes.register(modEventBus);
 
         modEventBus.addListener(RegisterGuiLayersEvent.class, HudOverlayRegistry::onRegisterLayers);
 
         modEventBus.addListener(EntityRenderersEvent.AddLayers.class, ClientModEvents::onAddLayers);
+
+        modEventBus.addListener(EntityRenderersEvent.RegisterRenderers.class, ClientModEvents::onRegisterRenderers);
 
         modEventBus.addListener(FMLClientSetupEvent.class, ClientModEvents::onClientSetup);
 
@@ -102,6 +108,12 @@ public class Fatality
                         }
                     });
 
+            //武器攻击意图
+            registrar.playToServer(
+                    C2SAttackIntent.TYPE,
+                    C2SAttackIntent.STREAM_CODEC,
+                    (payload, context) -> WeaponHandler.dispatch(context.player(), payload));
+
             //玩家光效同步
             registrar.playToClient(
                     SyncEffectPayload.TYPE,
@@ -111,6 +123,7 @@ public class Fatality
                         PlayerEffectUtil.apply(payload.playerUuid(), payload.texture(),
                                 payload.color(), payload.pulseSpeed());
                     });
+
         });
 
         NeoForge.EVENT_BUS.addListener(AddReloadListenerEvent.class, event ->

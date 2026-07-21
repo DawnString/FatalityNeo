@@ -6,5 +6,8 @@ public record WeaponStats(
         float critDamage,
         float fluctuation,
         float attSpeed,
-        WeaponType weaponType
+        WeaponType weaponType,
+        AttackMode attackMode,
+        int manaCost,
+        int cooldownTicks
 ) { }

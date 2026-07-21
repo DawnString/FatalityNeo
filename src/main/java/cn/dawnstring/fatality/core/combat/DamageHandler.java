@@ -23,13 +23,28 @@ public class DamageHandler
 {
     private static final Random RANDOM = new Random();
     public static final ThreadLocal<Boolean> LAST_HIT_CRIT = new ThreadLocal<>();
+    public static final ThreadLocal<Boolean> WEAPON_HANDLER_ACTIVE = ThreadLocal.withInitial(() -> false);
 
+    /**
+     * 供 WeaponHandler 调用：直接使用已确认的 WeaponItem 计算伤害，不再检查 instanceof。
+     */
+    public static float compute(Player attacker, LivingEntity target, WeaponItem weapon, DamageSource source)
+    {
+        return computeInternal(attacker, target, weapon.getWeaponStats(), source, 0);
+    }
+
+    /**
+     * 供 MixinLivingEntityHurt 调用：检查主手是否为 WeaponItem。
+     */
     public static float apply(Player attacker, LivingEntity target, DamageSource source, float amount)
     {
         ItemStack held = attacker.getMainHandItem();
         if (!(held.getItem() instanceof WeaponItem weapon)) return -1;
+        return computeInternal(attacker, target, weapon.getWeaponStats(), source, amount);
+    }
 
-        WeaponStats stats = weapon.getWeaponStats();
+    private static float computeInternal(Player attacker, LivingEntity target, WeaponStats stats, DamageSource source, float originalAmount)
+    {
         PlayerAttributes attributes = PlayerAttributesProvider.getAttributes(attacker);
 
         // 按武器类型选择对应的饰品加成
@@ -89,7 +104,7 @@ public class DamageHandler
                 attacker.level().getGameTime(),
                 target.getName().getString(),
                 stats.weaponType().name(),
-                amount,
+                originalAmount,
                 damage,
                 0,
                 isCrit,

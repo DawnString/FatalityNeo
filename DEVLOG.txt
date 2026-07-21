@@ -225,3 +225,25 @@ accessory/defensive
 -TooltipUtil
 -Fatality
 完成了1/4
+
+2026/7/21 12/42 实现武器系统，包括弹幕创建，伤害计算
+-ClientAttackHandler
+-WeaponProjectileRenderer
+-DamageHandler
+-WeaponHandler
+-ClientModEvents
+-ExplodeOnHit
+-PierceEntites
+-StraightFlight
+-ProjectileBehavior
+-ProjectileStats
+-WeaponProjectile
+-AttackMode
+-WeaponActive
+-WeaponItem
+-WeaponPassive
+-WeaponStats
+-MixinLivingEntityHurt
+-C2SAttackIntent
+-ModEntityTypes
+-Fatality

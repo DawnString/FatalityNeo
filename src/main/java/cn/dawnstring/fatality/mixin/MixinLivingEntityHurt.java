@@ -14,6 +14,10 @@ public class MixinLivingEntityHurt
     @ModifyVariable(method = "hurt", at = @At("HEAD"), argsOnly = true, ordinal = 0)
     private float onHurt(float amount, DamageSource source)
     {
+        // WeaponHandler 已处理过的伤害，跳过
+        if (DamageHandler.WEAPON_HANDLER_ACTIVE.get())
+            return amount;
+
         LivingEntity target = (LivingEntity) (Object) this;
 
         if (target.level().isClientSide())
