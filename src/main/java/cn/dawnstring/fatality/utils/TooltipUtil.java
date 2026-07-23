@@ -4,6 +4,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.fml.loading.FMLEnvironment;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.List;
@@ -14,6 +16,7 @@ public class TooltipUtil
 
     private static boolean isAltDown()
     {
+        if (FMLEnvironment.dist != Dist.CLIENT) return false;
         long window = Minecraft.getInstance().getWindow().getWindow();
         return GLFW.glfwGetKey(window, GLFW.GLFW_KEY_LEFT_ALT) == GLFW.GLFW_PRESS ||
                 GLFW.glfwGetKey(window, GLFW.GLFW_KEY_RIGHT_ALT) == GLFW.GLFW_PRESS;
@@ -21,6 +24,7 @@ public class TooltipUtil
 
     private static boolean isShiftDown()
     {
+        if (FMLEnvironment.dist != Dist.CLIENT) return false;
         long window = Minecraft.getInstance().getWindow().getWindow();
         return GLFW.glfwGetKey(window, GLFW.GLFW_KEY_LEFT_SHIFT) == GLFW.GLFW_PRESS ||
                 GLFW.glfwGetKey(window, GLFW.GLFW_KEY_RIGHT_SHIFT) == GLFW.GLFW_PRESS;

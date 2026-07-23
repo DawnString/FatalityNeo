@@ -1,12 +1,10 @@
 package cn.dawnstring.fatality;
 
-import cn.dawnstring.fatality.client.gui.hud.HudOverlayRegistry;
 import cn.dawnstring.fatality.core.combat.WeaponHandler;
 import cn.dawnstring.fatality.guide.loader.GuideLoader;
 import cn.dawnstring.fatality.item.weapon.WeaponItem;
 import cn.dawnstring.fatality.core.accessory.AccessoryManager;
 import cn.dawnstring.fatality.core.input.PlayerInputState;
-import cn.dawnstring.fatality.core.register.ClientModEvents;
 import cn.dawnstring.fatality.item.accessory.BaseShieldItem;
 import cn.dawnstring.fatality.item.accessory.Direction;
 import cn.dawnstring.fatality.network.C2SAttackIntent;
@@ -27,8 +25,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
@@ -55,13 +51,13 @@ public class Fatality
         ModCreativeTabs.register(modEventBus);
         ModEntityTypes.register(modEventBus);
 
-        modEventBus.addListener(RegisterGuiLayersEvent.class, HudOverlayRegistry::onRegisterLayers);
-
-        modEventBus.addListener(EntityRenderersEvent.AddLayers.class, ClientModEvents::onAddLayers);
-
-        modEventBus.addListener(EntityRenderersEvent.RegisterRenderers.class, ClientModEvents::onRegisterRenderers);
-
-        modEventBus.addListener(FMLClientSetupEvent.class, ClientModEvents::onClientSetup);
+        try
+        {
+            Class.forName("cn.dawnstring.fatality.client.ClientModSetup")
+                    .getMethod("init", IEventBus.class)
+                    .invoke(null, modEventBus);
+        }
+        catch (Exception ignored) {}
 
         modEventBus.addListener(RegisterPayloadHandlersEvent.class, event ->
         {
@@ -132,8 +128,6 @@ public class Fatality
                 event.addListener(new GuideLoader()));
 
         NeoForge.EVENT_BUS.addListener(Fatality::onFirstWood);
-
-        NeoForge.EVENT_BUS.addListener(HudOverlayRegistry::onRenderGuiLayerPre);
 
         NeoForge.EVENT_BUS.addListener(ServerTickEvent.Post.class, event ->
         {

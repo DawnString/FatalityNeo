@@ -3,7 +3,6 @@ package cn.dawnstring.fatality.guide;
 import cn.dawnstring.fatality.item.ItemCategory;
 import cn.dawnstring.fatality.register.AutoItem;
 import cn.dawnstring.fatality.utils.TooltipUtil;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -27,7 +26,15 @@ public class FinalWordsItem extends Item
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
     {
         if (level.isClientSide())
-            Minecraft.getInstance().setScreen(new FinalWordsScreen());
+        {
+            try
+            {
+                Class.forName("cn.dawnstring.fatality.client.gui.ClientGuideScreenOpener")
+                        .getMethod("open")
+                        .invoke(null);
+            }
+            catch (Exception ignored) {}
+        }
 
         return InteractionResultHolder.success(player.getItemInHand(hand));
     }

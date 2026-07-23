@@ -257,17 +257,14 @@ accessory/defensive
 -BossPhase
 -BossRegistry
 -TrackingFlight
--
 -修复 DragonFangLance 只发射一枚弹幕的bug（弹幕间互撞）
 -WeaponProjectile
 -DragonFangLance
-
 -添加 BladeOfMastersFall（噬主妖刀）
 -BladeOfMastersFall
 -WeaponItem
 -DamageHandler
 -Fatality
-
 -添加 NamelessBlade（无名之刃）+ Boss击杀世界存档系统
 -BossKillData
 -BossData
@@ -276,9 +273,15 @@ accessory/defensive
 -WeaponItem
 -DamageHandler
 -BladeOfMastersFall
-
 -为4把武器添加独特描述
 -WaveBreaker
 -DragonFangLance
 -BladeOfMastersFall
 -NamelessBlade
+
+2026/7/23 17/14 修复服务端问题,分离服务端与客户端代码的加载
+-ClientGuideScreenOpener
+-ClientModSetup
+-FinalWordsItem
+-TooltipUtil
+-Fatality
