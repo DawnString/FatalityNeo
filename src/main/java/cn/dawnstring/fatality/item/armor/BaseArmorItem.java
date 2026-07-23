@@ -52,8 +52,10 @@ public class BaseArmorItem extends ArmorItem
         {
             case SUPPORTER_ITEM:
                 this.uniqueItemTypeDes = Component.translatable("des.fatality.supporter_item");
+                break;
             case DEVELOPER_ITEM:
                 this.uniqueItemTypeDes = Component.translatable("des.fatality.developer_item");
+                break;
         }
     }
 

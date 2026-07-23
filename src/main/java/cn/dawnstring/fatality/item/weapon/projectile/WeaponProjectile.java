@@ -64,6 +64,7 @@ public class WeaponProjectile extends Projectile
     public WeaponProjectile(EntityType<? extends Projectile> type, Level level)
     {
         super(type, level);
+        this.behaviors = List.of();
     }
 
     @Override
@@ -85,60 +86,66 @@ public class WeaponProjectile extends Projectile
 
     private void tickServer()
     {
-        age++;
+        if (stats == null) { discard(); return; }
 
-        // 超时销毁
-        if (age > stats.lifetime())
-        {
-            discard();
-            return;
-        }
+        age++;
+        if (age > stats.lifetime()) { discard(); return; }
 
         // 应用重力
         if (stats.gravity())
             setDeltaMovement(getDeltaMovement().add(0, -0.03, 0));
 
-        // 行为 onTick
+        // 行为 onTick（影响运动轨迹）
         for (ProjectileBehavior b : behaviors)
             b.onTick(this);
 
-        // 实体碰撞检测
+        Vec3 movement = getDeltaMovement();
         Vec3 pos = position();
-        Vec3 nextPos = pos.add(getDeltaMovement());
-        AABB moveBox = getBoundingBox().expandTowards(getDeltaMovement()).inflate(1.0);
+        Vec3 nextPos = pos.add(movement);
 
+        // 实体碰撞检测（排除其他弹幕，防止同位置互撞）
+        AABB moveBox = getBoundingBox().expandTowards(movement).inflate(1.0);
         EntityHitResult entityHit = ProjectileUtil.getEntityHitResult(
                 this, pos, nextPos, moveBox,
-                e -> e != getOwner() && e.isAlive() && !hitEntities.contains(e.getUUID()),
+                e -> e != getOwner() && e.isAlive() && !hitEntities.contains(e.getUUID())
+                        && !(e instanceof WeaponProjectile),
                 stats.size()
         );
 
+        boolean pierced = false;
         if (entityHit != null)
         {
             onHitEntity(entityHit);
-            return; // 如果穿透则在 onHitEntity 中继续移动
+            if (isRemoved()) { setPos(nextPos); return; } // 销毁前移动到碰撞点
+            pierced = true;
         }
 
-        // 方块碰撞检测
-        Vec3 start = position();
-        Vec3 end = start.add(getDeltaMovement());
-        BlockHitResult blockHit = level().clip(new ClipContext(
-                start, end, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this
-        ));
-        if (blockHit.getType() != net.minecraft.world.phys.HitResult.Type.MISS)
+        // 方块碰撞检测（实体已穿透才检测方块）
+        if (!pierced)
         {
-            onHitBlock(blockHit);
+            BlockHitResult blockHit = level().clip(new ClipContext(
+                    pos, nextPos, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this
+            ));
+            if (blockHit.getType() != net.minecraft.world.phys.HitResult.Type.MISS)
+            {
+                onHitBlock(blockHit);
+                setPos(nextPos);
+                return;
+            }
         }
 
-        // 移动
+        // 每帧都移动到目标位置
         setPos(nextPos);
     }
 
     private void tickClient()
     {
         age++;
-        if (stats != null ? age > stats.lifetime() : age > 200)
-            discard();
+        int maxAge = stats != null ? stats.lifetime() : 200;
+        if (age > maxAge) { discard(); return; }
+
+        // 客户端实际移动，避免只靠服务端位置更新导致的一卡一卡
+        setPos(position().add(getDeltaMovement()));
     }
 
     @Override
@@ -196,6 +203,11 @@ public class WeaponProjectile extends Projectile
     public String getTextureId()
     {
         return entityData.get(TEXTURE_ID);
+    }
+
+    public int getAge()
+    {
+        return age;
     }
 
     public ProjectileStats getStats()

@@ -3,6 +3,7 @@ package cn.dawnstring.fatality.core.register;
 import cn.dawnstring.fatality.Fatality;
 import cn.dawnstring.fatality.core.ability.AbilitySystem;
 import cn.dawnstring.fatality.core.accessory.AccessoryManager;
+import cn.dawnstring.fatality.core.boss.BossKillData;
 import cn.dawnstring.fatality.core.capability.PlayerAttributesProvider;
 import cn.dawnstring.fatality.core.combat.ArmorStatManager;
 import cn.dawnstring.fatality.core.combat.RegenSystem;
@@ -141,5 +142,20 @@ public class ModEvents
     {
         if (event.getSource().getEntity() instanceof ServerPlayer player)
             AbilitySystem.onKill(player, event.getEntity());
+
+        // 追踪 Boss 击败记录（世界存档）
+        String bossId = BossKillData.resolveBossId(event.getEntity());
+        if (bossId != null)
+        {
+            var data = BossKillData.get(event.getEntity().level());
+            if (data != null)
+            {
+                data.markDefeated(bossId);
+                Fatality.LOGGER.info("Boss defeated: {} (recorded by {})", bossId,
+                        event.getSource().getEntity() != null
+                                ? event.getSource().getEntity().getName().getString()
+                                : "unknown");
+            }
+        }
     }
 }

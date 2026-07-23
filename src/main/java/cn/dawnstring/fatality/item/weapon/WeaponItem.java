@@ -5,6 +5,8 @@ import cn.dawnstring.fatality.item.weapon.projectile.ProjectileBehavior;
 import cn.dawnstring.fatality.item.weapon.projectile.ProjectileStats;
 import cn.dawnstring.fatality.utils.TooltipUtil;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -66,6 +68,24 @@ public abstract class WeaponItem extends Item
      */
     public List<ProjectileBehavior> getProjectileBehaviors() { return List.of(); }
 
+    /**
+     * 武器提供的伤害倍率（基于玩家和目标当前状态）。
+     * 默认 1.0，子类可覆盖以提供条件性增伤。
+     */
+    public float getDamageMultiplier(Player player, LivingEntity target) { return 1.0f; }
+
+    /**
+     * 武器提供的附加固定伤害（不经过暴击/浮动等计算）。
+     * 默认 0，子类可覆盖以提供基于目标状态的附加伤害。
+     */
+    public float getBonusDamage(Player player, LivingEntity target) { return 0f; }
+
+    /**
+     * 服务端 tick 回调。持有该武器时每 tick 调用一次。
+     * 默认空实现，子类可覆盖实现周期性效果。
+     */
+    public void onServerTick(Player player) {}
+
     public void setStory(Component story)
     {
         this.story = story;
@@ -87,8 +107,10 @@ public abstract class WeaponItem extends Item
         {
             case SUPPORTER_ITEM:
                 this.uniqueItemTypeDes = Component.translatable("des.fatality.supporter_item");
+                break;
             case DEVELOPER_ITEM:
                 this.uniqueItemTypeDes = Component.translatable("des.fatality.developer_item");
+                break;
         }
     }
 

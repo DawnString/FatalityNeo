@@ -30,7 +30,9 @@ public class DamageHandler
      */
     public static float compute(Player attacker, LivingEntity target, WeaponItem weapon, DamageSource source)
     {
-        return computeInternal(attacker, target, weapon.getWeaponStats(), source, 0);
+        float damage = computeInternal(attacker, target, weapon.getWeaponStats(), source, 0);
+        return damage * weapon.getDamageMultiplier(attacker, target)
+                + weapon.getBonusDamage(attacker, target);
     }
 
     /**
@@ -40,7 +42,9 @@ public class DamageHandler
     {
         ItemStack held = attacker.getMainHandItem();
         if (!(held.getItem() instanceof WeaponItem weapon)) return -1;
-        return computeInternal(attacker, target, weapon.getWeaponStats(), source, amount);
+        float damage = computeInternal(attacker, target, weapon.getWeaponStats(), source, amount);
+        return damage * weapon.getDamageMultiplier(attacker, target)
+                + weapon.getBonusDamage(attacker, target);
     }
 
     private static float computeInternal(Player attacker, LivingEntity target, WeaponStats stats, DamageSource source, float originalAmount)

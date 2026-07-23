@@ -3,6 +3,7 @@ package cn.dawnstring.fatality;
 import cn.dawnstring.fatality.client.gui.hud.HudOverlayRegistry;
 import cn.dawnstring.fatality.core.combat.WeaponHandler;
 import cn.dawnstring.fatality.guide.loader.GuideLoader;
+import cn.dawnstring.fatality.item.weapon.WeaponItem;
 import cn.dawnstring.fatality.core.accessory.AccessoryManager;
 import cn.dawnstring.fatality.core.input.PlayerInputState;
 import cn.dawnstring.fatality.core.register.ClientModEvents;
@@ -31,6 +32,7 @@ import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import org.slf4j.Logger;
@@ -132,6 +134,18 @@ public class Fatality
         NeoForge.EVENT_BUS.addListener(Fatality::onFirstWood);
 
         NeoForge.EVENT_BUS.addListener(HudOverlayRegistry::onRenderGuiLayerPre);
+
+        NeoForge.EVENT_BUS.addListener(ServerTickEvent.Post.class, event ->
+        {
+            var server = event.getServer();
+            if (server == null) return;
+            for (var player : server.getPlayerList().getPlayers())
+            {
+                var held = player.getMainHandItem();
+                if (held.getItem() instanceof WeaponItem weapon)
+                    weapon.onServerTick(player);
+            }
+        });
 
         LOGGER.info("Fatality initialized");
     }

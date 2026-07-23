@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "fatality:item/blade_of_masters_fall"
+  }
+}

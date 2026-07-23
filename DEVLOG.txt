@@ -247,3 +247,38 @@ accessory/defensive
 -C2SAttackIntent
 -ModEntityTypes
 -Fatality
+
+2026/7/23 16/55 添加boss名称映射，添加4把武器,以及稍微修改武器架构，更好的适配武器,修复一些bug
+-AccessoryItem
+-BaseArmorItem
+-MiscItem
+-WeaponStats
+-AoeOnHit
+-BossPhase
+-BossRegistry
+-TrackingFlight
+-
+-修复 DragonFangLance 只发射一枚弹幕的bug（弹幕间互撞）
+-WeaponProjectile
+-DragonFangLance
+
+-添加 BladeOfMastersFall（噬主妖刀）
+-BladeOfMastersFall
+-WeaponItem
+-DamageHandler
+-Fatality
+
+-添加 NamelessBlade（无名之刃）+ Boss击杀世界存档系统
+-BossKillData
+-BossData
+-ModEvents
+-NamelessBlade
+-WeaponItem
+-DamageHandler
+-BladeOfMastersFall
+
+-为4把武器添加独特描述
+-WaveBreaker
+-DragonFangLance
+-BladeOfMastersFall
+-NamelessBlade
